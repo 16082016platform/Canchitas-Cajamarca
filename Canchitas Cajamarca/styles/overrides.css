@@ -567,3 +567,11 @@
 .km-nova .field--gallery:not(.field--gallery-slider) .field__content .gallery__items:after {
   background: #dfe1e2;
 }
+
+
+/*MY CUSTOM*/
+
+#mapaScreen .km-content, #mapaScreen .km-scroll-container, #mapaScreen #map {
+    display: -webkit-box;
+    width: 100%;
+}

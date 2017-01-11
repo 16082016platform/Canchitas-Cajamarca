@@ -16,6 +16,9 @@
     <script src="app.js"></script>
     <script src="bower_components/everlive/min/everlive.all.min.js"></script>
     <script src="dataProviders/backendServices.js"></script>
+
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCEU_viSVbqh8mn10jxsKz3GOF5kqNrxVk&sensor=true"></script>
+
 </head>
 
 <body id="kendoUiMobileApp">
@@ -41,15 +44,15 @@
         </header>
     </div>
 
-    <div id="appDrawer" data-role="drawer" data-title="Navigation">
+    <div id="appDrawer" data-role="drawer" data-title="Navigation" data-swipe-to-open='false'>
         <header data-role="header">
             <div data-role="navbar">
                 <span data-role="view-title"></span>
             </div>
         </header>
         <ul id="navigation-container" data-role="listview">
-            <li><a href="components/home/view.html" data-icon="home"><span class="navigation-link-text" data-bind="text: strings.home.title"></span></a></li>
-
+            <!-- <li><a href="components/home/view.html" data-icon="home"><span class="navigation-link-text" data-bind="text: strings.home.title"></span></a></li>
+            -->
             <li><a href="components/canchas/view.html" data-icon="globe"><span class="navigation-link-text" data-bind="text: strings.canchas.title"></span></a></li>
 
             <li><a href="components/mapa/view.html" data-icon="globe"><span class="navigation-link-text" data-bind="text: strings.mapa.title"></span></a></li>
@@ -57,6 +60,8 @@
             <li><a href="components/sugerencias/view.html" data-icon="edit"><span class="navigation-link-text" data-bind="text: strings.sugerencias.title"></span></a></li>
 
             <li><a href="components/aboutView/view.html" data-icon="info"><span class="navigation-link-text" data-bind="text: strings.aboutView.title"></span></a></li>
+
+
             <li id="homeModellogout"><a href="components/home/view.html?logout=true" data-position="end" data-icon="action"><span class="navigation-link-text" data-bind="text: strings.home.homeModel.logoutLabel"></span></a></li>
         </ul>
     </div>

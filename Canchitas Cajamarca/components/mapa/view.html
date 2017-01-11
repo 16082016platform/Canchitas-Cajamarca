@@ -8,26 +8,6 @@
 
         </div>
     </header>
-
-
-    <!-- START_CUSTOM_CODE_mapa -->
-    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
-    <!-- END_CUSTOM_CODE_mapa -->
-    <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="inset" data-template="mapaModelTemplate" data-bind="source: mapaModel.dataSource, events: {click: mapaModel.itemClick}" data-pull-to-refresh="false" data-endless-scroll="false">
-    </ul>
-
-
-    <!-- START_CUSTOM_CODE_mapaModel -->
-    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
-    <!-- END_CUSTOM_CODE_mapaModel -->
-    <script type="text/x-kendo-template" id="mapaModelTemplate">
-        <div class="image-with-text">
-            # data = app.mapa.mapaModel.fixHierarchicalData(data); #
-
-            <h3>#: data['nombre'] #</h3>
-            <p>#: data['localizacion'] #</p>
-        </div>
-    </script>
+    
+    <div id="map"></div>
 </div>

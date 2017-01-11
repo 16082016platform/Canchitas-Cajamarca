@@ -15,7 +15,7 @@
           "registerPasswordLabel": "Password",
           "registerNameLabel": "Name",
           "registerLabel": "Register",
-          "registerRedirect": "home",
+          "registerRedirect": "canchas",
           "gotoSigninLabel": "Sign In",
           "enableLogout": true,
           "logoutLabel": "Sign Out",
@@ -24,7 +24,7 @@
           "emailLabel": "Email",
           "passwordLabel": "Password",
           "signinLabel": "Sign In",
-          "signinRedirect": "home"
+          "signinRedirect": "canchas"
         }
       ],
       "title": "Login",

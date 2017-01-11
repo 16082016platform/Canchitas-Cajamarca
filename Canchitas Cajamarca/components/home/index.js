@@ -13,8 +13,8 @@ app.localization.registerView('home');
 (function(parent) {
     var provider = app.data.backendServices,
         mode = 'signin',
-        registerRedirect = 'home',
-        signinRedirect = 'home',
+        registerRedirect = 'canchas',
+        signinRedirect = 'canchas',
         rememberKey = 'backendServices_authData_homeModel',
         init = function(error, result) {
             $('.status').text('');

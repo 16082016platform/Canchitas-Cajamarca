@@ -73,7 +73,7 @@ app.localization.registerView('mapa');
                     var dataItem = data[i];
 
                     /// start flattenLocation property
-                    flattenLocationProperties(dataItem);
+                    //flattenLocationProperties(dataItem);
                     /// end flattenLocation property
 
                 }
@@ -110,6 +110,61 @@ app.localization.registerView('mapa');
         /// end data sources
         mapaModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
+            cargarMapa: function (dataSource) {
+                dataSource.fetch(function () {
+
+                    //var index = dataSource.indexOf(dataItem);
+                    //console.log(dataSource); // displays "0"
+
+                    var map;
+                    var bounds = new google.maps.LatLngBounds();
+                    var mapOptions = {
+                        mapTypeId: 'roadmap'
+                    };
+
+                    // Display a map on the page
+                    map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                    map.setTilt(45);
+
+                    // Display multiple markers on a map
+                    var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+                    // Loop through our array of markers & place each one on the map  
+                    for (i = 0; i < dataSource.total(); i++) {
+                        var dataItem = dataSource.at(i);
+                        
+                        var position = new google.maps.LatLng(dataItem.localizacion.latitude, dataItem.localizacion.longitude);
+
+
+                        bounds.extend(position);
+                        marker = new google.maps.Marker({
+                            position: position,
+                            map: map,
+                            title: dataItem.id
+                        });
+
+                        // Allow each marker to have an info window    
+                        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                            return function () {
+                                map.setZoom(15);
+                                //bounds.extend(this.getPosition());
+                                map.setCenter(this.getPosition());
+                                infoWindow.setContent("<h1 onclick='itemClickMapa(" + '"' + dataItem.uid + '"' + ");'>" + dataSource.at(i).nombre + "</h1>");
+                                infoWindow.open(map, marker);
+                            }
+                        })(marker, i));
+
+                        // Automatically center the map fitting all markers on the screen
+                        map.fitBounds(bounds);
+                    }
+
+                    // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+                    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
+                        this.setZoom(12);
+                        google.maps.event.removeListener(boundsListener);
+                    });
+                });
+            },
             fixHierarchicalData: function(data) {
                 var result = {},
                     layout = {};
@@ -241,6 +296,9 @@ app.localization.registerView('mapa');
         dataSource = new kendo.data.DataSource(dataSourceOptions);
         mapaModel.set('dataSource', dataSource);
         fetchFilteredData(param);
+
+        mapaModel.cargarMapa(dataSource);
+
     });
 
 })(app.mapa);
@@ -249,3 +307,8 @@ app.localization.registerView('mapa');
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
 // END_CUSTOM_CODE_mapaModel
+
+
+function itemClickMapa(uid) {
+    app.mobileApp.navigate('#components/mapa/details.html?uid=' + uid);
+}
