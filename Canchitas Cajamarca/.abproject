@@ -1,0 +1,45 @@
+{
+  "ProjectName": "Canchitas Cajamarca",
+  "ProjectGuid": "d38c5dc5-90d4-4da6-99f8-05711be4ca06",
+  "projectVersion": 1,
+  "AppIdentifier": "com.telerik.CanchitasCajamarca",
+  "DisplayName": "Canchitas Cajamarca",
+  "Author": "",
+  "Description": "Canchitas Cajamarca",
+  "BundleVersion": "1.0",
+  "AndroidVersionCode": "1",
+  "iOSDeviceFamily": [
+    "1",
+    "2"
+  ],
+  "iOSBackgroundMode": [],
+  "ProjectTypeGuids": "{070BCB52-5A75-4F8C-A973-144AF0EAFCC9}",
+  "FrameworkVersion": "4.0.0",
+  "AndroidPermissions": [
+    "android.permission.INTERNET"
+  ],
+  "DeviceOrientations": [
+    "Portrait",
+    "Landscape"
+  ],
+  "AndroidHardwareAcceleration": "true",
+  "iOSStatusBarStyle": "Default",
+  "Framework": "Cordova",
+  "WP8TileTitle": "",
+  "WP8Publisher": "",
+  "WP8Capabilities": [
+    "ID_CAP_NETWORKING",
+    "ID_CAP_WEBBROWSERCOMPONENT"
+  ],
+  "WP8Requirements": [],
+  "WP8PublisherID": "{22bdd28b-200b-4bf1-a242-3f4a2ccb7526}",
+  "WP8ProductID": "{84b678ec-8589-48e8-a7ab-24131d52e962}",
+  "WPSdk": "8.0",
+  "WP8PackageIdentityName": "1234Telerik.CanchitasCajamarca",
+  "WP8WindowsPublisherName": "CN=Telerik",
+  "WP8SupportedResolutions": [
+    "ID_RESOLUTION_WVGA",
+    "ID_RESOLUTION_WXGA",
+    "ID_RESOLUTION_HD720P"
+  ]
+}
