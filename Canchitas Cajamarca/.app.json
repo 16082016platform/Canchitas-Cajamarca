@@ -4,18 +4,312 @@
     {
       "type": "kendo-ui-mobile:view",
       "name": "home",
-      "components": [],
-      "title": "Home View",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:authentication",
+          "name": "homeModel",
+          "dataProvider": "backendServices",
+          "enableRegistration": true,
+          "gotoRegisterLabel": "Register",
+          "registerEmailLabel": "Email",
+          "registerPasswordLabel": "Password",
+          "registerNameLabel": "Name",
+          "registerLabel": "Register",
+          "registerRedirect": "home",
+          "gotoSigninLabel": "Sign In",
+          "enableLogout": true,
+          "logoutLabel": "Sign Out",
+          "enableRememberme": true,
+          "remembermeLabel": "Remember Me",
+          "emailLabel": "Email",
+          "passwordLabel": "Password",
+          "signinLabel": "Sign In",
+          "signinRedirect": "home"
+        }
+      ],
+      "title": "Login",
       "addToNavigation": true,
       "icon": "home"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "canchas",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "telefono",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "telefono",
+                  "inputType": "textBlock",
+                  "wideFieldTitlePosition": "top",
+                  "dataBindingOptional": "telefono"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "celular",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Celular",
+                  "inputType": "textBlock",
+                  "wideFieldTitlePosition": "top",
+                  "dataBindingOptional": "celular"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "contacto",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Contacto",
+                  "inputType": "textBlock",
+                  "wideFieldTitlePosition": "top",
+                  "dataBindingOptional": "contacto"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "foto",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Foto",
+                  "inputType": "image",
+                  "titlePosition": "top",
+                  "alignment": "center",
+                  "dataBindingImage": "foto"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "grass",
+                  "dataBindingRelationChildren": "[{\"expand\":\"costodia\",\"property\":\"grass\",\"type\":\"grasses\",\"isArray\":true},{\"expand\":\"costohora\",\"property\":\"grass\",\"type\":\"grasses\",\"isArray\":true},{\"expand\":\"costonoche\",\"property\":\"grass\",\"type\":\"grasses\",\"isArray\":true},{\"expand\":\"descripcion\",\"property\":\"grass\",\"type\":\"grasses\",\"isArray\":true},{\"expand\":\"dimenciones\",\"property\":\"grass\",\"type\":\"grasses\",\"isArray\":true},{\"expand\":\"estado\",\"property\":\"grass\",\"type\":\"grasses\",\"isArray\":true},{\"expand\":\"medida\",\"property\":\"grass\",\"type\":\"grasses\",\"isArray\":true},{\"expand\":\"activo\",\"property\":\"grass\",\"type\":\"grasses\",\"isArray\":true}]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Grasses",
+                  "inputType": "dataList",
+                  "wideFieldTitlePosition": "top",
+                  "dataBindingRelationParent": "grass"
+                }
+              ],
+              "name": "editableListForm42",
+              "formType": "detail"
+            }
+          ],
+          "name": "canchasModel",
+          "dataProvider": "backendServices",
+          "collection": "canchas",
+          "filterField": "nombre",
+          "headerField": "nombre",
+          "imageField": "foto",
+          "subHeaderField": "localizacion",
+          "addItemForm": false,
+          "editItemForm": false,
+          "deleteItemButton": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "isMapView": false,
+          "serverSideSorting": false,
+          "serverSidePaging": false,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detalle",
+          "detailSubHeaderField": "nombre"
+        }
+      ],
+      "title": "Canchas",
+      "addToNavigation": true,
+      "icon": "globe"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "mapa",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [],
+          "name": "mapaModel",
+          "dataProvider": "backendServices",
+          "collection": "canchas",
+          "headerField": "nombre",
+          "subHeaderField": "localizacion",
+          "addItemForm": false,
+          "editItemForm": false,
+          "deleteItemButton": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "isMapView": false,
+          "serverSideSorting": false,
+          "serverSidePaging": false,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Details"
+        }
+      ],
+      "title": "Mapa",
+      "addToNavigation": true,
+      "icon": "globe"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "sugerencias",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "puntuacion",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Puntuación",
+                  "inputType": "textBlock",
+                  "wideFieldTitlePosition": "top",
+                  "dataBindingOptional": "puntuacion"
+                }
+              ],
+              "name": "editableListForm55",
+              "formType": "list"
+            },
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "puntuacion",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Puntuación",
+                  "inputType": "textBlock",
+                  "wideFieldTitlePosition": "top",
+                  "dataBindingOptional": "puntuacion"
+                }
+              ],
+              "name": "editableListForm56",
+              "formType": "detail"
+            },
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "pregunta",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Sugerencia",
+                  "inputType": "textArea",
+                  "wideFieldTitlePosition": "top",
+                  "dataBinding": "pregunta"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "puntuacion",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Puntuación",
+                  "inputType": "number",
+                  "titlePosition": "top",
+                  "placeholder": "Type here ...",
+                  "dataBinding": "puntuacion"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "cancha",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Cancha",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "placeholder": "Type here ...",
+                  "dataBinding": "cancha"
+                }
+              ],
+              "name": "editableListForm57",
+              "formType": "add"
+            }
+          ],
+          "name": "sugerenciasModel",
+          "dataProvider": "backendServices",
+          "collection": "sugerencias",
+          "headerField": "pregunta",
+          "subHeaderField": "respuesta",
+          "addItemForm": true,
+          "addScreenHeaderValue": "Nueva",
+          "editItemForm": false,
+          "deleteItemButton": true,
+          "deleteItemConfirmation": true,
+          "pullToRefresh": false,
+          "endlessScroll": true,
+          "isMapView": false,
+          "serverSideSorting": true,
+          "serverSideSortingField": "CreatedAt",
+          "serverSideSortingDirection": "desc",
+          "serverSidePaging": false,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Sugerencia",
+          "detailSubHeaderField": "pregunta",
+          "detailDescriptionField": "respuesta"
+        }
+      ],
+      "title": "Sugerencias",
+      "addToNavigation": true,
+      "icon": "edit"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "aboutView",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:about",
+          "name": "aboutViewModel",
+          "appName": "My App",
+          "appVersion": "Version 1",
+          "appIcon": "icono.png",
+          "appDescription": "The maximum image size is 2.0MB. If the uploaded image does not display in the simulator after you apply your changes, wait a few seconds and refresh the simulator.\n\nThe maximum image size is 2.0MB. If the uploaded image does not display in the simulator after you apply your changes, wait a few seconds and refresh the simulator.\n\nThe maximum image size is 2.0MB. If the uploaded image does not display in the simulator after you apply your changes, wait a few seconds and refresh the simulator.",
+          "contactButton": true,
+          "contactLabel": "Contact us",
+          "contactMail": "vicenmasa0102@gmail.com",
+          "facebookButton": true,
+          "facebookLabel": "Like us on Facebook",
+          "facebookLink": "https://www.facebook.com/Telerik",
+          "twitterButton": true,
+          "twitterLabel": "Follow us on Twitter",
+          "twitterLink": "https://twitter.com/telerik"
+        }
+      ],
+      "title": "About",
+      "addToNavigation": true,
+      "icon": "info"
     }
   ],
-  "dataProviders": [],
+  "dataProviders": [
+    {
+      "type": "kendo-ui-mobile:dataProvider",
+      "name": "backendServices",
+      "source": "everlive",
+      "everliveKey": "8wtnrrgnhb7s24g8",
+      "offlineStorage": true,
+      "title": "Backend Services"
+    }
+  ],
   "name": "kendoUiMobileApp",
-  "navigation": "tabstrip",
+  "navigation": "drawer",
   "view": "home",
-  "transition": "slide",
-  "showMoreTab": true,
   "skin": "nova",
   "skinMainColor": "#32364c",
   "skinTextColor": "#ffffff",

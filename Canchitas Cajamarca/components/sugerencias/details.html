@@ -1,0 +1,40 @@
+<div data-role="view" data-title="Details" data-model="app.sugerencias.sugerenciasModel" data-bind="events: { show: detailsShow }" id="sugerenciasModelScreen" class="screen screen--detail">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <a data-role="backbutton" data-align="left">Back</a>
+            <span data-bind="text: strings.sugerencias.sugerenciasModel.detailHeaderFieldValue"></span>
+            <a data-role="button" class="nav-button" data-align="right" data-bind="events: { click: deleteClick }"><i class="km-icon km-delete"></i></a>
+        </div>
+    </header>
+
+    <div class="details-content screen__content screen__content--details">
+        <div class="km-listview-wrapper">
+            <ul class="km-listview km-list km-listinset details-fields">
+                <li>
+                    <h3 data-bind="text: currentItem.pregunta"></h3></li>
+                <li>
+                    <div data-bind="html: currentItem.respuesta"></div>
+                </li>
+
+                <li class="detail-content-item">
+
+
+                    <label id="puntuacionField" class="km-label-above field field--text-block">
+
+                        <span class="field__label" data-bind="text: strings.sugerencias.sugerenciasModel.editableListForm55.puntuacion.title"></span>
+
+
+                        <div class="textBlock field__content" data-bind="html: currentItem.puntuacion"></div>
+
+                    </label>
+
+
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- START_CUSTOM_CODE_sugerenciasModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_sugerenciasModel -->
+</div>

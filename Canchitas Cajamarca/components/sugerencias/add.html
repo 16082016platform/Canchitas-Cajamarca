@@ -1,0 +1,50 @@
+<div data-role="view" data-title="Add" data-model="app.sugerencias.addItemViewModel" data-bind="events: { show: onShow }" id="sugerenciasModelAddScreen" class="screen screen--add add-item-view">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <span data-bind="text: strings.sugerencias.sugerenciasModel.addScreenHeaderValue"></span>
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }">Cancel</a>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>
+        </div>
+    </header>
+    <!-- START_CUSTOM_CODE_sugerenciasModel -->
+    <!-- END_CUSTOM_CODE_sugerenciasModel -->
+    <div id="editableListForm57" class="form-view screen__content screen__content--form">
+        <form>
+            <ul class="form-content" data-role="listview" data-style="inset">
+                <li class="form-content-item">
+                    <label id="preguntaField" class="km-label-above field field--textarea">
+
+                        <span class="field__label" data-bind="text: strings.sugerencias.sugerenciasModel.editableListForm57.pregunta.title"></span>
+
+                        <textarea rows="7" data-bind="value: addFormData.pregunta"></textarea>
+                    </label>
+                </li>
+                <li class="form-content-item">
+
+
+                    <label id="puntuacionField" class="field km-listview-label field--number km-label-above">
+                        <span class="field__label" data-bind="text: strings.sugerencias.sugerenciasModel.editableListForm55.puntuacion.title"></span>
+
+
+                        <input id="puntuacion" data-bind="value: addFormData.puntuacion" type="number">
+
+                    </label>
+                </li>
+                <li class="form-content-item">
+
+
+                    <label id="canchaField" class="field km-listview-label field--text km-label-above">
+                        <span class="field__label" data-bind="text: strings.sugerencias.sugerenciasModel.editableListForm57.cancha.title"></span>
+
+
+                        <input id="cancha" data-bind="value: addFormData.cancha" type="text">
+
+                    </label>
+                </li>
+            </ul>
+        </form>
+        <!-- START_CUSTOM_CODE_editableListForm57 -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <!-- END_CUSTOM_CODE_editableListForm57 -->
+    </div>
+</div>

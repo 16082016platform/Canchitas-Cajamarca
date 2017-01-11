@@ -5,6 +5,82 @@
     "qrCodeScan": "Scan"
   },
   "home": {
-    "title": "Home View"
+    "title": "Login",
+    "homeModel": {
+      "logoutLabel": "Sign Out",
+      "emailLabel": "Email",
+      "passwordLabel": "Password",
+      "signinLabel": "Sign In",
+      "gotoRegisterLabel": "Register",
+      "remembermeLabel": "Remember Me",
+      "registerEmailLabel": "Email",
+      "registerPasswordLabel": "Password",
+      "registerNameLabel": "Name",
+      "registerLabel": "Register",
+      "gotoSigninLabel": "Sign In"
+    }
+  },
+  "canchas": {
+    "title": "Canchas",
+    "canchasModel": {
+      "detailHeaderFieldValue": "Detalle",
+      "editableListForm42": {
+        "telefono": {
+          "title": "telefono"
+        },
+        "celular": {
+          "title": "Celular"
+        },
+        "contacto": {
+          "title": "Contacto"
+        },
+        "foto": {
+          "title": "Foto"
+        },
+        "grass": {
+          "title": "Grasses"
+        }
+      }
+    }
+  },
+  "mapa": {
+    "title": "Mapa",
+    "mapaModel": {
+      "detailHeaderFieldValue": "Details"
+    }
+  },
+  "sugerencias": {
+    "title": "Sugerencias",
+    "sugerenciasModel": {
+      "detailHeaderFieldValue": "Sugerencia",
+      "addScreenHeaderValue": "Nueva",
+      "editableListForm55": {
+        "puntuacion": {
+          "title": "Puntuación",
+          "placeholder": "Type here ..."
+        }
+      },
+      "editableListForm56": {},
+      "editableListForm57": {
+        "pregunta": {
+          "title": "Sugerencia"
+        },
+        "cancha": {
+          "title": "Cancha",
+          "placeholder": "Type here ..."
+        }
+      }
+    }
+  },
+  "aboutView": {
+    "title": "About",
+    "aboutViewModel": {
+      "appName": "My App",
+      "appVersion": "Version 1",
+      "appDescription": "The maximum image size is 2.0MB. If the uploaded image does not display in the simulator after you apply your changes, wait a few seconds and refresh the simulator.\n\nThe maximum image size is 2.0MB. If the uploaded image does not display in the simulator after you apply your changes, wait a few seconds and refresh the simulator.\n\nThe maximum image size is 2.0MB. If the uploaded image does not display in the simulator after you apply your changes, wait a few seconds and refresh the simulator.",
+      "contactLabel": "Contact us",
+      "facebookLabel": "Like us on Facebook",
+      "twitterLabel": "Follow us on Twitter"
+    }
   }
 }

@@ -1,0 +1,43 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.sugerencias" data-show="app.sugerencias.onShow" data-after-show="app.sugerencias.afterShow" id="sugerenciasScreen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.sugerencias.title"></span>
+
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+
+            <a data-role="button" data-align="right" data-bind="events: { click: sugerenciasModel.addClick }">Add</a></div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_sugerencias -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_sugerencias -->
+    <!--  Certain features like grouping and inset styling are not supported when endless scroll is enabled. -->
+
+    <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="" data-template="sugerenciasModelTemplate" data-bind="source: sugerenciasModel.dataSource, events: {click: sugerenciasModel.itemClick}" data-pull-to-refresh="false" data-endless-scroll="true">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_sugerenciasModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_sugerenciasModel -->
+    <script type="text/x-kendo-template" id="sugerenciasModelTemplate">
+        <div class="image-with-text">
+            # data = app.sugerencias.sugerenciasModel.fixHierarchicalData(data); #
+
+            <h3>#: data['pregunta'] #</h3>
+            <p>#: data['respuesta'] #</p>
+        </div>
+        <label id="puntuacionField" class="km-label-above field field--text-block">
+
+            <span class="field__label" data-bind="text: strings.sugerencias.sugerenciasModel.editableListForm55.puntuacion.title"></span>
+
+
+            <div class="textBlock field__content">#= data['puntuacion'] #</div>
+
+        </label>
+    </script>
+</div>

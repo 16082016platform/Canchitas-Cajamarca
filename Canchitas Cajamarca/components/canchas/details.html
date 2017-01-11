@@ -1,0 +1,93 @@
+<div data-role="view" data-title="Details" data-model="app.canchas.canchasModel" data-bind="events: { show: detailsShow }" id="canchasModelScreen" class="screen screen--detail">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <a data-role="backbutton" data-align="left">Back</a>
+            <span data-bind="text: strings.canchas.canchasModel.detailHeaderFieldValue"></span>
+        </div>
+    </header>
+
+    <div class="details-content screen__content screen__content--details">
+        <div class="km-listview-wrapper">
+            <ul class="km-listview km-list km-listinset details-fields">
+                <li>
+                    <h3 data-bind="text: currentItem.nombre"></h3></li>
+
+
+                <li class="detail-content-item">
+
+
+                    <label id="telefonoField" class="km-label-above field field--text-block">
+
+                        <span class="field__label" data-bind="text: strings.canchas.canchasModel.editableListForm42.telefono.title"></span>
+
+
+                        <div class="textBlock field__content" data-bind="html: currentItem.telefono"></div>
+
+                    </label>
+
+
+                </li>
+                <li class="detail-content-item">
+
+
+                    <label id="celularField" class="km-label-above field field--text-block">
+
+                        <span class="field__label" data-bind="text: strings.canchas.canchasModel.editableListForm42.celular.title"></span>
+
+
+                        <div class="textBlock field__content" data-bind="html: currentItem.celular"></div>
+
+                    </label>
+
+
+                </li>
+                <li class="detail-content-item">
+
+
+                    <label id="contactoField" class="km-label-above field field--text-block">
+
+                        <span class="field__label" data-bind="text: strings.canchas.canchasModel.editableListForm42.contacto.title"></span>
+
+
+                        <div class="textBlock field__content" data-bind="html: currentItem.contacto"></div>
+
+                    </label>
+
+
+                </li>
+                <li class="detail-content-item">
+
+                    <div id="fotoField" class="km-label-above imageListItem field field--image">
+
+                        <div class="field__label" data-bind="text: strings.canchas.canchasModel.editableListForm42.foto.title"></div>
+
+                        <div class="align-center field__content">
+
+                            <img data-bind="attr: { src: currentItem.fotoImage }">
+
+                        </div>
+                    </div>
+
+                </li>
+                <li class="detail-content-item">
+                    <div id="grassField" name="grass" class="field field--data-list"><span class="field__label" data-bind="text: strings.canchas.canchasModel.editableListForm42.grass.title"></span>
+                        <ul class="dataListField field__content">
+                            <li>
+                                <ul data-bind="source: currentItem.grass" data-template="grass_grass"></ul>
+                                <script id="grass_grass" type="text/x-kendo-template">
+                                    <li><span data-bind="text: costodia"></span><span data-bind="text: costohora"></span><span data-bind="text: costonoche"></span><span data-bind="text: descripcion"></span><span data-bind="text: dimenciones"></span>
+                                        <span
+                                        data-bind="text: estado"></span><span data-bind="text: medida"></span><span data-bind="text: activo"></span></li>
+                                </script>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- START_CUSTOM_CODE_canchasModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_canchasModel -->
+</div>
