@@ -5,12 +5,10 @@
             <span data-bind="text: strings.canchas.canchasModel.detailHeaderFieldValue"></span>
         </div>
     </header>
-
+    
     <div class="details-content screen__content screen__content--details">
         <div class="km-listview-wrapper">
             <ul class="km-listview km-list km-listinset details-fields">
-                <li>
-                    <h3 data-bind="text: currentItem.nombre"></h3></li>
 
 
                 <li class="detail-content-item">
@@ -76,11 +74,38 @@
                                 <ul data-bind="source: currentItem.grass" data-template="grass_grass"></ul>
                                 <script id="grass_grass" type="text/x-kendo-template">
                                     <li><span data-bind="text: costodia"></span><span data-bind="text: costohora"></span><span data-bind="text: costonoche"></span><span data-bind="text: descripcion"></span><span data-bind="text: dimenciones"></span>
-                                        <span
-                                        data-bind="text: estado"></span><span data-bind="text: medida"></span><span data-bind="text: activo"></span></li>
+                                        <span data-bind="text: estado"></span><span data-bind="text: medida"></span><span data-bind="text: activo"></span></li>
                                 </script>
                             </li>
                         </ul>
+                    </div>
+                </li>
+                <li class="form-content-item">
+
+
+                    <div id="localizacionField" class="field field--location imageListItem km-label-above">
+
+                        <div class="field__label" data-bind="text: strings.canchas.canchasModel.editableListForm42.localizacion.title"></div>
+
+                        <div class="field__content">
+
+                            <p data-bind="html: getDistance"></p>
+
+                        </div>
+                    </div>
+                </li>
+                <li class="form-content-item">
+
+
+                    <div id="actualField" class="field field--location imageListItem km-label-above">
+
+                        <div class="field__label" data-bind="text: strings.canchas.canchasModel.editableListForm42.actual.title"></div>
+
+                        <div class="field__content">
+
+                            <p data-bind="html: getCoordinates"></p>
+
+                        </div>
                     </div>
                 </li>
             </ul>
@@ -90,4 +115,9 @@
     <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
 
     <!-- END_CUSTOM_CODE_canchasModel -->
+    <header data-role="footer">
+        <div data-role="navbar" class="header-text">
+             <a data-role="button" data-click-on="down" data-align="center" data-click="onClick">Reservar</a>
+        </div>
+    </header>
 </div>

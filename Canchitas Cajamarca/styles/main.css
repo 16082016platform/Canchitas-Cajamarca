@@ -515,7 +515,7 @@ Fields
 }
 
 #kendoUiMobileApp .km-shim {
-    background: transparent;
+    /*background: transparent;*/
 }
 
 #kendoUiMobileApp .multiple-select-modal-window.km-modalview {
@@ -524,8 +524,8 @@ Fields
 }
 
 #kendoUiMobileApp .km-modalview-root .k-animation-container {
-    height: 100% !important;
-    width: 100% !important;
+    height: auto !important;
+    width: auto !important;
 }
 
 #kendoUiMobileApp .km-modalview-wrapper {
@@ -534,8 +534,8 @@ Fields
     left: 10%;
     right: 10%;
     bottom: 10%;
-    width: auto;
-    height: auto;
+    width: auto !important;
+    height: auto !important;
 }
 
 

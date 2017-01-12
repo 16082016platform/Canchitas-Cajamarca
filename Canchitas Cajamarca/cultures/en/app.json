@@ -39,6 +39,12 @@
         },
         "grass": {
           "title": "Grasses"
+        },
+        "localizacion": {
+          "title": "Localizacion"
+        },
+        "actual": {
+          "title": "actual"
         }
       }
     }

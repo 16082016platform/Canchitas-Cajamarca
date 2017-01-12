@@ -1,11 +1,11 @@
-<div data-role="view" data-title="View" data-layout="main" data-model="app.canchas" data-show="app.canchas.onShow" data-after-show="app.canchas.afterShow" id="canchasScreen" class="screen">
+<div data-role="view" data-title="View" data-layout="main" data-model="app.canchas" data-init="app.canchas.onShow" data-after-show="app.canchas.afterShow" id="canchasScreen" class="screen">
     <header data-role="header">
         <div data-role="navbar" class="header-text">
 
             <span data-bind="text: strings.canchas.title"></span>
 
             <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
-
+            
         </div>
     </header>
 
@@ -32,9 +32,8 @@
         <div class="image-with-text">
             # data = app.canchas.canchasModel.fixHierarchicalData(data); #
 
-            <img src="#: data['fotoUrl'] #">
             <h3>#: data['nombre'] #</h3>
-            <p>#: data['localizacion'] #</p>
+            <p id="#: 'distancia'+data['id'] #" >#: data['xxx'] #</p>
         </div>
     </script>
 </div>

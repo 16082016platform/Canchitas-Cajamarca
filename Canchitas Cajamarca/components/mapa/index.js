@@ -1,8 +1,10 @@
 'use strict';
 
 app.mapa = kendo.observable({
-    onShow: function() {},
-    afterShow: function() {}
+    onShow: function () { },
+    afterShow: function () {
+        app.mapa.mapaModel.cargarMapa(app.mapa.mapaModel.dataSource);
+    }
 });
 app.localization.registerView('mapa');
 
@@ -10,11 +12,11 @@ app.localization.registerView('mapa');
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
 // END_CUSTOM_CODE_mapa
-(function(parent) {
+(function (parent) {
     var dataProvider = app.data.backendServices,
         /// start global model properties
         /// end global model properties
-        fetchFilteredData = function(paramFilter, searchFilter) {
+        fetchFilteredData = function (paramFilter, searchFilter) {
             var model = parent.get('mapaModel'),
                 dataSource;
 
@@ -43,9 +45,9 @@ app.localization.registerView('mapa');
             }
         },
 
-        flattenLocationProperties = function(dataItem) {
+        flattenLocationProperties = function (dataItem) {
             var propName, propValue,
-                isLocation = function(value) {
+                isLocation = function (value) {
                     return propValue && typeof propValue === 'object' &&
                         propValue.longitude && propValue.latitude;
                 };
@@ -67,18 +69,18 @@ app.localization.registerView('mapa');
                 typeName: 'canchas',
                 dataProvider: dataProvider
             },
-            change: function(e) {
+            change: function (e) {
                 var data = this.data();
                 for (var i = 0; i < data.length; i++) {
                     var dataItem = data[i];
 
                     /// start flattenLocation property
-                    //flattenLocationProperties(dataItem);
+                    flattenLocationProperties(dataItem);
                     /// end flattenLocation property
 
                 }
             },
-            error: function(e) {
+            error: function (e) {
 
                 if (e.xhr) {
                     var errorText = "";
@@ -114,8 +116,6 @@ app.localization.registerView('mapa');
                 dataSource.fetch(function () {
 
                     //var index = dataSource.indexOf(dataItem);
-                    //console.log(dataSource); // displays "0"
-
                     var map;
                     var bounds = new google.maps.LatLngBounds();
                     var mapOptions = {
@@ -131,10 +131,11 @@ app.localization.registerView('mapa');
 
                     // Loop through our array of markers & place each one on the map  
                     for (i = 0; i < dataSource.total(); i++) {
-                        var dataItem = dataSource.at(i);
+                        var dataItem = dataSource.at(i), propName;
                         
-                        var position = new google.maps.LatLng(dataItem.localizacion.latitude, dataItem.localizacion.longitude);
+                        var localizacion = dataItem.localizacion.split(",");
 
+                        var position = new google.maps.LatLng(localizacion[0].replace("Latitude: ",""), localizacion[1].replace("Longitude: ",""));
 
                         bounds.extend(position);
                         marker = new google.maps.Marker({
@@ -165,7 +166,7 @@ app.localization.registerView('mapa');
                     });
                 });
             },
-            fixHierarchicalData: function(data) {
+            fixHierarchicalData: function (data) {
                 var result = {},
                     layout = {};
 
@@ -216,13 +217,13 @@ app.localization.registerView('mapa');
 
                 return result;
             },
-            itemClick: function(e) {
+            itemClick: function (e) {
                 var dataItem = e.dataItem || mapaModel.originalItem;
 
                 app.mobileApp.navigate('#components/mapa/details.html?uid=' + dataItem.uid);
 
             },
-            detailsShow: function(e) {
+            detailsShow: function (e) {
                 var uid = e.view.params.uid,
                     dataSource = mapaModel.get('dataSource'),
                     itemModel = dataSource.getByUid(uid);
@@ -232,7 +233,7 @@ app.localization.registerView('mapa');
                 /// start detail form show
                 /// end detail form show
             },
-            setCurrentItemByUid: function(uid) {
+            setCurrentItemByUid: function (uid) {
                 var item = uid,
                     dataSource = mapaModel.get('dataSource'),
                     itemModel = dataSource.getByUid(item);
@@ -250,7 +251,7 @@ app.localization.registerView('mapa');
 
                 return itemModel;
             },
-            linkBind: function(linkString) {
+            linkBind: function (linkString) {
                 var linkChunks = linkString.split('|');
                 if (linkChunks[0].length === 0) {
                     return this.get('currentItem.' + linkChunks[1]);
@@ -275,7 +276,7 @@ app.localization.registerView('mapa');
         parent.set('mapaModel', mapaModel);
     }
 
-    parent.set('onShow', function(e) {
+    parent.set('onShow', function (e) {
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,
             isListmenu = false,
             backbutton = e.view.element && e.view.element.find('header [data-role="navbar"] .backButtonWrapper'),
@@ -297,8 +298,7 @@ app.localization.registerView('mapa');
         mapaModel.set('dataSource', dataSource);
         fetchFilteredData(param);
 
-        mapaModel.cargarMapa(dataSource);
-
+        //mapaModel.cargarMapa(dataSource);
     });
 
 })(app.mapa);

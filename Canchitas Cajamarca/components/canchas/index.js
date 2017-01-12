@@ -1,8 +1,10 @@
 'use strict';
 
 app.canchas = kendo.observable({
-    onShow: function() {},
-    afterShow: function() {}
+    onShow: function () { },
+    afterShow: function () {
+        //app.canchas.canchasModel.dataSource.sort({ field: "distancia", dir: "desc" });
+    }
 });
 app.localization.registerView('canchas');
 
@@ -10,14 +12,14 @@ app.localization.registerView('canchas');
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
 // END_CUSTOM_CODE_canchas
-(function(parent) {
+(function (parent) {
     var dataProvider = app.data.backendServices,
         /// start global model properties
 
-        processImage = function(img) {
+        processImage = function (img) {
 
             function isAbsolute(img) {
-                if  (img && (img.slice(0,  5)  ===  'http:' || img.slice(0,  6)  ===  'https:' || img.slice(0,  2)  ===  '//'  ||  img.slice(0,  5)  ===  'data:')) {
+                if (img && (img.slice(0, 5) === 'http:' || img.slice(0, 6) === 'https:' || img.slice(0, 2) === '//' || img.slice(0, 5) === 'data:')) {
                     return true;
                 }
                 return false;
@@ -33,9 +35,81 @@ app.localization.registerView('canchas');
 
             return img;
         },
+
+        markerLayers = {},
+        getLocation = function (options) {
+            var d = new $.Deferred();
+            if (options === undefined) {
+                options = {
+                    enableHighAccuracy: true
+                };
+            }
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    d.resolve(position);
+                },
+                function (error) {
+                    d.reject(error);
+                },
+                options);
+            return d.promise();
+        },
+
+
+        processDistance = function (data, id, i, callback) {
+            getLocation()
+                .then(function (userPosition) {
+                    var localizacion = data.split(",");
+                    var latitude = localizacion[0].replace("Latitude: ", "");
+                    var longitude = localizacion[1].replace("Longitude: ", "");
+
+                    var position = L.latLng(userPosition.coords.latitude, userPosition.coords.longitude),
+                        markerPosition = L.latLng(latitude, longitude),
+                        distance;
+                    distance = Math.round(position.distanceTo(markerPosition));
+                    if (distance > 1000) {
+                        distance /= 1000;
+                        distance += " km";
+                    } else {
+                        distance += " m";
+                    }
+                    $("#canchasScreen p#distancia" + id).text(distance);
+                    var distancia = canchasModel.dataSource.at(i);
+                    distancia.set("distancia", distance);
+                    callback(distance);
+                });
+        },
+
+        getDistance = function (data, callback) {
+            getLocation()
+                .then(function (userPosition) {
+                    var localizacion = data.split(",");
+                    var latitude = localizacion[0].replace("Latitude: ", "");
+                    var longitude = localizacion[1].replace("Longitude: ", "");
+
+                    var position = L.latLng(userPosition.coords.latitude, userPosition.coords.longitude),
+                        markerPosition = L.latLng(latitude, longitude),
+                        distance;
+                    distance = Math.round(position.distanceTo(markerPosition));
+                    if (distance > 1000) {
+                        distance /= 1000;
+                        distance += " km";
+                    } else {
+                        distance += " m";
+                    }
+                    callback(distance);
+                });
+        },
+
+        getCoordinates = function (data) {
+            var localizacion = data.split(",");
+            var latitude = localizacion[0].replace("Latitude: ", "");
+            var longitude = localizacion[1].replace("Longitude: ", "");
+            return latitude + ' Latitude <br />' + longitude + ' Longitude';
+        },
         /// end global model properties
 
-        fetchFilteredData = function(paramFilter, searchFilter) {
+        fetchFilteredData = function (paramFilter, searchFilter) {
             var model = parent.get('canchasModel'),
                 dataSource;
 
@@ -64,9 +138,9 @@ app.localization.registerView('canchas');
             }
         },
 
-        flattenLocationProperties = function(dataItem) {
+        flattenLocationProperties = function (dataItem) {
             var propName, propValue,
-                isLocation = function(value) {
+                isLocation = function (value) {
                     return propValue && typeof propValue === 'object' &&
                         propValue.longitude && propValue.latitude;
                 };
@@ -97,21 +171,36 @@ app.localization.registerView('canchas');
                 typeName: 'canchas',
                 dataProvider: dataProvider
             },
-            change: function(e) {
+            change: function (e) {
                 var data = this.data();
                 for (var i = 0; i < data.length; i++) {
                     var dataItem = data[i];
 
+                    flattenLocationProperties(dataItem);
+
+                    if (dataItem['distancia'] !== undefined) {
+                        return;
+                    }
+
+
+
                     dataItem['fotoUrl'] =
                         processImage(dataItem['foto']);
 
+
                     /// start flattenLocation property
-                    flattenLocationProperties(dataItem);
+
+                    //dataItem['xxx'] =
+                    //  getDistancia(dataItem['localizacion']);
+                    processDistance(dataItem['localizacion'], dataItem['id'], i, function (value) {
+
+                    });
                     /// end flattenLocation property
+
 
                 }
             },
-            error: function(e) {
+            error: function (e) {
 
                 if (e.xhr) {
                     var errorText = "";
@@ -138,16 +227,20 @@ app.localization.registerView('canchas');
                             field: 'foto',
                             defaultValue: ''
                         },
+                        'distancia': {
+                            defaultValue: '',
+                        },
                     }
                 }
             },
             serverFiltering: true,
+            sort: { field: "distancia", dir: "desc" }
         },
         /// start data sources
         /// end data sources
         canchasModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
-            searchChange: function(e) {
+            searchChange: function (e) {
                 var searchVal = e.target.value,
                     searchFilter;
 
@@ -160,7 +253,7 @@ app.localization.registerView('canchas');
                 }
                 fetchFilteredData(canchasModel.get('paramFilter'), searchFilter);
             },
-            fixHierarchicalData: function(data) {
+            fixHierarchicalData: function (data) {
                 var result = {},
                     layout = {
                         "grass": [{}]
@@ -213,13 +306,13 @@ app.localization.registerView('canchas');
 
                 return result;
             },
-            itemClick: function(e) {
+            itemClick: function (e) {
                 var dataItem = e.dataItem || canchasModel.originalItem;
 
                 app.mobileApp.navigate('#components/canchas/details.html?uid=' + dataItem.uid);
 
             },
-            detailsShow: function(e) {
+            detailsShow: function (e) {
                 var uid = e.view.params.uid,
                     dataSource = canchasModel.get('dataSource'),
                     itemModel = dataSource.getByUid(uid);
@@ -227,9 +320,17 @@ app.localization.registerView('canchas');
                 canchasModel.setCurrentItemByUid(uid);
 
                 /// start detail form show
+
+                getDistance(itemModel.localizacion, function (value) {
+                    canchasModel.set('getDistance', value);
+                });
+
+                canchasModel.set('getCoordinates', getCoordinates(itemModel.localizacion));
+
                 /// end detail form show
+
             },
-            setCurrentItemByUid: function(uid) {
+            setCurrentItemByUid: function (uid) {
                 var item = uid,
                     dataSource = canchasModel.get('dataSource'),
                     itemModel = dataSource.getByUid(item);
@@ -250,7 +351,7 @@ app.localization.registerView('canchas');
 
                 return itemModel;
             },
-            linkBind: function(linkString) {
+            linkBind: function (linkString) {
                 var linkChunks = linkString.split('|');
                 if (linkChunks[0].length === 0) {
                     return this.get('currentItem.' + linkChunks[1]);
@@ -277,7 +378,7 @@ app.localization.registerView('canchas');
         parent.set('canchasModel', canchasModel);
     }
 
-    parent.set('onShow', function(e) {
+    parent.set('onShow', function (e) {
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,
             isListmenu = false,
             backbutton = e.view.element && e.view.element.find('header [data-role="navbar"] .backButtonWrapper'),
@@ -306,3 +407,11 @@ app.localization.registerView('canchas');
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
 // END_CUSTOM_CODE_canchasModel
+function closeModalViewLogin() {
+    $("#modalview-login").kendoMobileModalView("close");
+}
+function onClick() {
+    var mv = $("#modalview-login").data("kendoMobileModalView");
+    mv.shim.popup.options.animation.open.effects = "zoom";
+    mv.open();
+}

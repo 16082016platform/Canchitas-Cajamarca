@@ -95,6 +95,28 @@
                   "inputType": "dataList",
                   "wideFieldTitlePosition": "top",
                   "dataBindingRelationParent": "grass"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "localizacion",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Localizacion",
+                  "inputType": "location",
+                  "titlePosition": "top",
+                  "dataBinding": "localizacion",
+                  "locationDisplayType": "distance"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "actual",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "actual",
+                  "inputType": "location",
+                  "titlePosition": "top",
+                  "dataBinding": "localizacion",
+                  "locationDisplayType": "coordinates"
                 }
               ],
               "name": "editableListForm42",
@@ -117,8 +139,7 @@
           "serverSideSorting": false,
           "serverSidePaging": false,
           "detailHeaderFieldSource": "static",
-          "detailHeaderFieldValue": "Detalle",
-          "detailSubHeaderField": "nombre"
+          "detailHeaderFieldValue": "Detalle"
         }
       ],
       "title": "Canchas",

@@ -6,19 +6,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, width=device-width">
     <link href="kendo/styles/kendo.mobile.all.min.css" rel="stylesheet">
-
     <link href="styles/overrides.css" rel="stylesheet">
     <link href="styles/main.css" rel="stylesheet">
-
     <script src="cordova.js"></script>
     <script src="kendo/js/jquery.min.js"></script>
     <script src="kendo/js/kendo.mobile.min.js"></script>
     <script src="app.js"></script>
     <script src="bower_components/everlive/min/everlive.all.min.js"></script>
     <script src="dataProviders/backendServices.js"></script>
-
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCEU_viSVbqh8mn10jxsKz3GOF5kqNrxVk&sensor=true"></script>
-
+    <link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet">
+    <script src="bower_components/leaflet/dist/leaflet.js"></script>
 </head>
 
 <body id="kendoUiMobileApp">
@@ -29,52 +27,46 @@
     <script src="components/home/index.js"></script>
     <div data-role="layout" data-id="main">
         <header data-role="header">
-            <div data-role="navbar">
-                <span data-role="view-title"></span>
-                <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+            <div data-role="navbar"> <span data-role="view-title"></span>
+                <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left"
+                    data-icon="drawer-button"></a>
             </div>
         </header>
     </div>
-
     <div data-role="layout" data-id="main-nonav">
         <header data-role="header">
-            <div data-role="navbar">
-                <span data-role="view-title"></span>
-            </div>
+            <div data-role="navbar"> <span data-role="view-title"></span> </div>
         </header>
     </div>
-
-    <div id="appDrawer" data-role="drawer" data-title="Navigation" data-swipe-to-open='false'>
+    <div id="appDrawer" data-role="drawer" data-title="Navigation" data-swipe-to-open="false">
         <header data-role="header">
-            <div data-role="navbar">
-                <span data-role="view-title"></span>
-            </div>
+            <div data-role="navbar"> <span data-role="view-title"></span> </div>
         </header>
         <ul id="navigation-container" data-role="listview">
             <!-- <li><a href="components/home/view.html" data-icon="home"><span class="navigation-link-text" data-bind="text: strings.home.title"></span></a></li>
             -->
             <li><a href="components/canchas/view.html" data-icon="globe"><span class="navigation-link-text" data-bind="text: strings.canchas.title"></span></a></li>
-
             <li><a href="components/mapa/view.html" data-icon="globe"><span class="navigation-link-text" data-bind="text: strings.mapa.title"></span></a></li>
-
             <li><a href="components/sugerencias/view.html" data-icon="edit"><span class="navigation-link-text" data-bind="text: strings.sugerencias.title"></span></a></li>
-
             <li><a href="components/aboutView/view.html" data-icon="info"><span class="navigation-link-text" data-bind="text: strings.aboutView.title"></span></a></li>
-
-
             <li id="homeModellogout"><a href="components/home/view.html?logout=true" data-position="end" data-icon="action"><span class="navigation-link-text" data-bind="text: strings.home.homeModel.logoutLabel"></span></a></li>
         </ul>
     </div>
-    <div id="notify" class="notify-pop-up">
-        <span class="notify-pop-up__content"></span>
+    <div data-role="modalview" id="modalview-login" style="width: 90%;">
+        <div data-role="header">
+            <div data-role="navbar"> <span>Login</span> <a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancel</a> </div>
+        </div>
+        <ul data-role="listview" data-style="inset">
+            <li><label for="username">Username: <input type="text" id="username" /></label></li>
+            <li><label for="password">Password: <input type="password" id="password" /></label></li>
+        </ul>
+        <div data-role="footer">
+            <div data-role="navbar"> 
+                <a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button" data-align="right">Login</a>
+                <a data-click="closeModalViewLogin" id="modalview-reg-button" type="button" data-role="button" data-align="right">Register</a>
+            </div>
+        </div>
     </div>
-    <!--  start index html save -->
-    <!--  end index html save -->
-
-    <!-- START_CUSTOM_CODE_kendoUiMobileApp -->
-    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
-    <!-- END_CUSTOM_CODE_kendoUiMobileApp -->
 </body>
 
 </html>
