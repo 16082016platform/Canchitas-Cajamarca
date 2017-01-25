@@ -130,5 +130,11 @@
         }
       }
     }
+  },
+  "grasses": {
+    "title": "Grasses",
+    "grassesModel": {
+      "detailHeaderFieldValue": "Detail"
+    }
   }
 }

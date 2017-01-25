@@ -467,6 +467,37 @@
       "title": "Reservas",
       "addToNavigation": true,
       "icon": "recents"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "grasses",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [],
+          "name": "grassesModel",
+          "dataProvider": "backendServices",
+          "collection": "grasses",
+          "headerField": "descripcion",
+          "addItemForm": false,
+          "editItemForm": false,
+          "deleteItemButton": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "isMapView": false,
+          "serverSideSorting": false,
+          "serverSidePaging": false,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail"
+        }
+      ],
+      "title": "Grasses",
+      "addToNavigation": true,
+      "icon": "more"
     }
   ],
   "dataProviders": [

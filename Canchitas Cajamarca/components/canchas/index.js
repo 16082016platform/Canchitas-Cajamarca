@@ -412,11 +412,10 @@ function goToReservas(e) {
     var dataItem = app.canchas.canchasModel.get('currentItem');
     var fecha = new Date();
     fecha = kendo.toString(fecha, "MM-dd-yyyy");
-    console.log(dataItem);
-    console.log(dataItem.grass);
+    var id = dataItem.grass[0].Id;
     var filter = [
-        { field: "cancha", operator: "eq", value: dataItem.Id},
-        { field: "fecha", operator: "eq", value: kendo.parseDate(fecha,"MM-dd-yyyy") }
+        { field: "grass", operator: "eq", value: id },
+        { field: "fecha", operator: "eq", value: kendo.parseDate(fecha, "MM-dd-yyyy") }
     ];
     app.mobileApp.navigate('#components/reservas/view.html?filter=' + encodeURIComponent(JSON.stringify(filter)));
 }

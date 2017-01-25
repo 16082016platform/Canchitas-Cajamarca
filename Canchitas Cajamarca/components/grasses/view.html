@@ -1,0 +1,33 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.grasses" data-show="app.grasses.onShow" data-after-show="app.grasses.afterShow" id="grassesScreen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.grasses.title"></span>
+
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+
+        </div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_grasses -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_grasses -->
+    <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="inset" data-template="grassesModelTemplate" data-bind="source: grassesModel.dataSource, events: {click: grassesModel.itemClick}" data-pull-to-refresh="false" data-endless-scroll="false">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_grassesModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_grassesModel -->
+    <script type="text/x-kendo-template" id="grassesModelTemplate">
+        <div class="image-with-text">
+            # data = app.grasses.grassesModel.fixHierarchicalData(data); #
+
+            <h3>#: data['descripcion'] #</h3>
+
+        </div>
+    </script>
+</div>
