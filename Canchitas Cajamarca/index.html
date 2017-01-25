@@ -14,12 +14,13 @@
     <script src="app.js"></script>
     <script src="bower_components/everlive/min/everlive.all.min.js"></script>
     <script src="dataProviders/backendServices.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCEU_viSVbqh8mn10jxsKz3GOF5kqNrxVk&sensor=true"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCEU_viSVbqh8mn10jxsKz3GOF5kqNrxVk&amp;sensor=true"></script>
     <link href="bower_components/leaflet/dist/leaflet.css" rel="stylesheet">
     <script src="bower_components/leaflet/dist/leaflet.js"></script>
 </head>
 
 <body id="kendoUiMobileApp">
+    <script src="components/reservas/index.js"></script>
     <script src="components/aboutView/index.js"></script>
     <script src="components/sugerencias/index.js"></script>
     <script src="components/mapa/index.js"></script>
@@ -28,8 +29,7 @@
     <div data-role="layout" data-id="main">
         <header data-role="header">
             <div data-role="navbar"> <span data-role="view-title"></span>
-                <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left"
-                    data-icon="drawer-button"></a>
+                <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
             </div>
         </header>
     </div>
@@ -49,6 +49,8 @@
             <li><a href="components/mapa/view.html" data-icon="globe"><span class="navigation-link-text" data-bind="text: strings.mapa.title"></span></a></li>
             <li><a href="components/sugerencias/view.html" data-icon="edit"><span class="navigation-link-text" data-bind="text: strings.sugerencias.title"></span></a></li>
             <li><a href="components/aboutView/view.html" data-icon="info"><span class="navigation-link-text" data-bind="text: strings.aboutView.title"></span></a></li>
+
+            <li><a href="components/reservas/view.html" data-icon="recents"><span class="navigation-link-text" data-bind="text: strings.reservas.title"></span></a></li>
             <li id="homeModellogout"><a href="components/home/view.html?logout=true" data-position="end" data-icon="action"><span class="navigation-link-text" data-bind="text: strings.home.homeModel.logoutLabel"></span></a></li>
         </ul>
     </div>
@@ -57,11 +59,19 @@
             <div data-role="navbar"> <span>Login</span> <a data-click="closeModalViewLogin" data-role="button" data-align="right">Cancel</a> </div>
         </div>
         <ul data-role="listview" data-style="inset">
-            <li><label for="username">Username: <input type="text" id="username" /></label></li>
-            <li><label for="password">Password: <input type="password" id="password" /></label></li>
+            <li>
+                <label for="username">Username:
+                    <input type="text" id="username">
+                </label>
+            </li>
+            <li>
+                <label for="password">Password:
+                    <input type="password" id="password">
+                </label>
+            </li>
         </ul>
         <div data-role="footer">
-            <div data-role="navbar"> 
+            <div data-role="navbar">
                 <a data-click="closeModalViewLogin" id="modalview-login-button" type="button" data-role="button" data-align="right">Login</a>
                 <a data-click="closeModalViewLogin" id="modalview-reg-button" type="button" data-role="button" data-align="right">Register</a>
             </div>

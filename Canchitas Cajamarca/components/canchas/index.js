@@ -407,11 +407,27 @@ app.localization.registerView('canchas');
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
 // END_CUSTOM_CODE_canchasModel
-function closeModalViewLogin() {
+
+function goToReservas(e) {
+    var dataItem = app.canchas.canchasModel.get('currentItem');
+    var fecha = new Date();
+    fecha = kendo.toString(fecha, "MM-dd-yyyy");
+    console.log(dataItem);
+    console.log(dataItem.grass);
+    var filter = [
+        { field: "cancha", operator: "eq", value: dataItem.Id},
+        { field: "fecha", operator: "eq", value: kendo.parseDate(fecha,"MM-dd-yyyy") }
+    ];
+    app.mobileApp.navigate('#components/reservas/view.html?filter=' + encodeURIComponent(JSON.stringify(filter)));
+}
+
+/*function closeModalViewLogin() {
     $("#modalview-login").kendoMobileModalView("close");
 }
+
 function onClick() {
     var mv = $("#modalview-login").data("kendoMobileModalView");
     mv.shim.popup.options.animation.open.effects = "zoom";
     mv.open();
-}
+}*/
+

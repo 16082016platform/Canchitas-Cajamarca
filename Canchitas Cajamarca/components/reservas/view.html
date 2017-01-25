@@ -1,0 +1,39 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.reservas" data-show="app.reservas.onShow" data-after-show="app.reservas.afterShow" id="reservasScreen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.reservas.title"></span>
+
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+
+            <a data-role="button" data-align="right" data-bind="events: { click: reservasModel.addClick }">Add</a></div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_reservas -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_reservas -->
+    <form class="km-filter-form custom-filter">
+
+        <div class="km-filter-wrap">
+            <input type="search" placeholder="Search..." data-bind="events:{keyup: reservasModel.searchChange}">
+        </div>
+    </form>
+    <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="inset" data-template="reservasModelTemplate" data-bind="source: reservasModel.dataSource, events: {click: reservasModel.itemClick}" data-pull-to-refresh="false" data-endless-scroll="false">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_reservasModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_reservasModel -->
+    <script type="text/x-kendo-template" id="reservasModelTemplate">
+        <div class="image-with-text">
+            # data = app.reservas.reservasModel.fixHierarchicalData(data); #
+
+            <h3>#: data['fecha'] #</h3>
+            <p>#: data['estado'] #</p>
+        </div>
+    </script>
+</div>

@@ -1,0 +1,64 @@
+<div data-role="view" data-title="Edit" data-model="app.reservas.editItemViewModel" data-bind="events: { show: onShow }" id="reservasModelEditScreen" class="screen screen--edit edit-item-view">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+            <span data-bind="text: strings.reservas.reservasModel.editScreenHeaderValue"></span>
+            <a data-role="backbutton" data-align="left" data-bind="events: { click: onCancel }">Cancel</a>
+            <a data-role="button" data-align="right" data-bind="events: { click: onSaveClick }">Save</a>
+        </div>
+    </header>
+    <!-- START_CUSTOM_CODE_reservasModel -->
+    <!-- END_CUSTOM_CODE_reservasModel -->
+    <div id="editableListForm61" class="form-view screen__content screen__content--form">
+        <form>
+            <ul class="form-content" data-role="listview" data-style="inset">
+                <li class="form-content-item">
+
+
+                    <label id="grassEditField" class="field km-listview-label field--text km-label-above">
+                        <span class="field__label" data-bind="text: strings.reservas.reservasModel.editableListForm61.grassEdit.title"></span>
+
+
+                        <input id="grassEdit" data-bind="value: editFormData.grassEdit" type="text">
+
+                    </label>
+                </li>
+                <li class="form-content-item">
+
+
+                    <label id="estadoEditField" class="field km-listview-label field--text km-label-above">
+                        <span class="field__label" data-bind="text: strings.reservas.reservasModel.editableListForm61.estadoEdit.title"></span>
+
+
+                        <input id="estadoEdit" data-bind="value: editFormData.estadoEdit" type="text">
+
+                    </label>
+                </li>
+                <li class="form-content-item">
+
+
+                    <label id="costoEditField" class="field km-listview-label field--text km-label-above">
+                        <span class="field__label" data-bind="text: strings.reservas.reservasModel.editableListForm61.costoEdit.title"></span>
+
+
+                        <input id="costoEdit" data-bind="value: editFormData.costoEdit" type="text">
+
+                    </label>
+                </li>
+                <li class="form-content-item">
+
+
+                    <label id="fechaEditField" class="field km-listview-label field--date km-label-above">
+                        <span class="field__label" data-bind="text: strings.reservas.reservasModel.editableListForm61.fechaEdit.title"></span>
+
+
+                        <input id="fechaEdit" data-bind="value: editFormData.fechaEdit" type="date">
+
+                    </label>
+                </li>
+            </ul>
+        </form>
+        <!-- START_CUSTOM_CODE_editableListForm61 -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <!-- END_CUSTOM_CODE_editableListForm61 -->
+    </div>
+</div>

@@ -88,5 +88,47 @@
       "facebookLabel": "Like us on Facebook",
       "twitterLabel": "Follow us on Twitter"
     }
+  },
+  "reservas": {
+    "title": "Reservas",
+    "reservasModel": {
+      "detailHeaderFieldValue": "Detail",
+      "addScreenHeaderValue": "Crear",
+      "editScreenHeaderValue": "Editar",
+      "editableListForm60": {
+        "grassAdd": {
+          "title": "Grass",
+          "placeholder": "grass"
+        },
+        "costoAdd": {
+          "title": "Costo",
+          "placeholder": "Costo total"
+        },
+        "horasAdd": {
+          "title": "Horas",
+          "placeholder": "Horas reservadas"
+        },
+        "fechaAdd": {
+          "title": "Fecha"
+        }
+      },
+      "editableListForm61": {
+        "grassEdit": {
+          "title": "Grass",
+          "placeholder": "Grass"
+        },
+        "estadoEdit": {
+          "title": "Estado",
+          "placeholder": "Estado"
+        },
+        "costoEdit": {
+          "title": "Costo",
+          "placeholder": "Costo"
+        },
+        "fechaEdit": {
+          "title": "Fecha"
+        }
+      }
+    }
   }
 }

@@ -316,6 +316,157 @@
       "title": "About",
       "addToNavigation": true,
       "icon": "info"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "reservas",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "grassAdd",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Grass",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "placeholder": "grass",
+                  "dataBinding": "grass"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "costoAdd",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Costo",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "placeholder": "Costo total",
+                  "dataBinding": "costo"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "horasAdd",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Horas",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "placeholder": "Horas reservadas",
+                  "dataBinding": "costo"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "fechaAdd",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Fecha",
+                  "inputType": "date",
+                  "titlePosition": "top",
+                  "inputDateType": "date",
+                  "dataBinding": "fecha"
+                }
+              ],
+              "name": "editableListForm60",
+              "formType": "add"
+            },
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "grassEdit",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Grass",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "placeholder": "Grass",
+                  "dataBinding": "grass"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "estadoEdit",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Estado",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "placeholder": "Estado",
+                  "dataBinding": "estado"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "costoEdit",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Costo",
+                  "inputType": "text",
+                  "titlePosition": "top",
+                  "inputTextType": "text",
+                  "placeholder": "Costo",
+                  "dataBinding": "costo"
+                },
+                {
+                  "type": "kendo-ui-mobile:editableListFormField",
+                  "name": "fechaEdit",
+                  "dataBindingRelationChildren": "[]",
+                  "dataBindingMultipleSelectChildren": "[]",
+                  "title": "Fecha",
+                  "inputType": "date",
+                  "titlePosition": "top",
+                  "inputDateType": "date",
+                  "dataBinding": "fecha"
+                }
+              ],
+              "name": "editableListForm61",
+              "formType": "edit"
+            }
+          ],
+          "name": "reservasModel",
+          "dataProvider": "backendServices",
+          "collection": "reservas",
+          "filterField": "estado",
+          "headerField": "fecha",
+          "subHeaderField": "estado",
+          "addItemForm": true,
+          "addScreenHeaderValue": "Crear",
+          "editItemForm": true,
+          "editScreenHeaderSource": "static",
+          "editScreenHeaderValue": "Editar",
+          "deleteItemButton": true,
+          "deleteItemConfirmation": true,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "isMapView": false,
+          "geoPointFieldAdditional": "estado",
+          "serverSideSorting": true,
+          "serverSideSortingField": "estado",
+          "serverSideSortingDirection": "asc",
+          "serverSidePaging": false,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail",
+          "detailSubHeaderField": "fecha",
+          "detailDescriptionField": "estado"
+        }
+      ],
+      "title": "Reservas",
+      "addToNavigation": true,
+      "icon": "recents"
     }
   ],
   "dataProviders": [
