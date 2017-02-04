@@ -1,8 +1,8 @@
 'use strict';
 
 app.reservas = kendo.observable({
-    onShow: function() {},
-    afterShow: function() {}
+    onShow: function () { },
+    afterShow: function () { }
 });
 app.localization.registerView('reservas');
 
@@ -10,11 +10,15 @@ app.localization.registerView('reservas');
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
 // END_CUSTOM_CODE_reservas
-(function(parent) {
+(function (parent) {
     var dataProvider = app.data.backendServices,
+        horas = [],
+        costo = 0,
         /// start global model properties
         /// end global model properties
-        fetchFilteredData = function(paramFilter, searchFilter) {
+        fetchFilteredData = function (paramFilter, searchFilter) {
+            horas = [];
+            costo = 0;
             var model = parent.get('reservasModel'),
                 dataSource;
 
@@ -41,11 +45,24 @@ app.localization.registerView('reservas');
             } else {
                 dataSource.filter({});
             }
+            $('#reservasScreen [id^=Hora]').removeClass('disabled');
+            $('#reservasScreen [id^="input"]').prop("checked", false);
+
+            dataSource.fetch(function () {
+                var data = this.data();
+                for (var i = 0; i < data.length; i++) {
+                    for (var j = 0; j < data[i].horas.length; j++) {
+                        $("#Hora" + data[i].horas[j]).addClass('disabled');
+                    }
+                }
+            }).then(function () {
+                kendo.mobile.application.hideLoading();
+            });
         },
 
-        flattenLocationProperties = function(dataItem) {
+        flattenLocationProperties = function (dataItem) {
             var propName, propValue,
-                isLocation = function(value) {
+                isLocation = function (value) {
                     return propValue && typeof propValue === 'object' &&
                         propValue.longitude && propValue.latitude;
                 };
@@ -67,7 +84,7 @@ app.localization.registerView('reservas');
                 typeName: 'reservas',
                 dataProvider: dataProvider
             },
-            change: function(e) {
+            change: function (e) {
                 var data = this.data();
                 for (var i = 0; i < data.length; i++) {
                     var dataItem = data[i];
@@ -78,7 +95,7 @@ app.localization.registerView('reservas');
 
                 }
             },
-            error: function(e) {
+            error: function (e) {
 
                 if (e.xhr) {
                     var errorText = "";
@@ -115,7 +132,48 @@ app.localization.registerView('reservas');
         /// end data sources
         reservasModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
-            searchChange: function(e) {
+            buscarReservas: function (e) {
+                $("#editableListForm60").hide(0, function () {
+                    kendo.mobile.application.showLoading();
+                });
+                $("#editableListForm60").hide(500, function () {
+
+                });
+                $("#editableListForm60").show(1500, function () {
+                    var filter = [
+                        { field: "grass", operator: "eq", value: $("#grassAdd").val() },
+                        { field: "fecha", operator: "eq", value: $("#fechaAdd").val() + "T05:00:00.000Z" }
+                    ];
+                    fetchFilteredData(filter);
+                });
+            },
+            reservarHora: function (e) {
+                //console.log($("#" + e.currentTarget.id).is(':checked'));
+                //console.log(e.currentTarget.id.replace('input', ''));
+                var h = parseInt(e.currentTarget.id.replace('input', '')),
+                    costodia = parseInt($("#grassAdd option:selected").attr("costodia")),
+                    costonoche = parseInt($("#grassAdd option:selected").attr("costonoche")),
+                    costohora = parseInt($("#grassAdd option:selected").attr("costohora"));
+                if ($("#" + e.currentTarget.id).is(':checked')) {
+                    horas.push(h);
+                    if (costohora < h) {
+                        costo += costodia;
+                    } else {
+                        costo += costonoche;
+                    }
+                } else {
+                    horas.splice(horas.indexOf(h, 1));
+                    if (costohora < h) {
+                        costo -= costodia;
+                    } else {
+                        costo -= costonoche;
+                    }
+                }
+                console.log(horas);
+                console.log(costo);
+                $("#costoAdd").val(costo);
+            },
+            searchChange: function (e) {
                 var searchVal = e.target.value,
                     searchFilter;
 
@@ -128,7 +186,7 @@ app.localization.registerView('reservas');
                 }
                 fetchFilteredData(reservasModel.get('paramFilter'), searchFilter);
             },
-            fixHierarchicalData: function(data) {
+            fixHierarchicalData: function (data) {
                 var result = {},
                     layout = {};
 
@@ -179,40 +237,40 @@ app.localization.registerView('reservas');
 
                 return result;
             },
-            itemClick: function(e) {
+            itemClick: function (e) {
                 var dataItem = e.dataItem || reservasModel.originalItem;
 
                 app.mobileApp.navigate('#components/reservas/details.html?uid=' + dataItem.uid);
 
             },
-            addClick: function() {
+            addClick: function () {
                 app.mobileApp.navigate('#components/reservas/add.html');
             },
-            editClick: function() {
+            editClick: function () {
                 var uid = this.originalItem.uid;
                 app.mobileApp.navigate('#components/reservas/edit.html?uid=' + uid);
             },
-            deleteItem: function() {
+            deleteItem: function () {
                 var dataSource = reservasModel.get('dataSource');
 
                 dataSource.remove(this.originalItem);
 
-                dataSource.one('sync', function() {
+                dataSource.one('sync', function () {
                     app.mobileApp.navigate('#:back');
                 });
 
-                dataSource.one('error', function() {
+                dataSource.one('error', function () {
                     dataSource.cancelChanges();
                 });
 
                 dataSource.sync();
             },
-            deleteClick: function() {
+            deleteClick: function () {
                 var that = this;
 
                 navigator.notification.confirm(
                     'Are you sure you want to delete this item?',
-                    function(index) {
+                    function (index) {
                         //'OK' is index 1
                         //'Cancel' - index 2
                         if (index === 1) {
@@ -222,7 +280,7 @@ app.localization.registerView('reservas');
                     '', ['OK', 'Cancel']
                 );
             },
-            detailsShow: function(e) {
+            detailsShow: function (e) {
                 var uid = e.view.params.uid,
                     dataSource = reservasModel.get('dataSource'),
                     itemModel = dataSource.getByUid(uid);
@@ -232,7 +290,7 @@ app.localization.registerView('reservas');
                 /// start detail form show
                 /// end detail form show
             },
-            setCurrentItemByUid: function(uid) {
+            setCurrentItemByUid: function (uid) {
                 var item = uid,
                     dataSource = reservasModel.get('dataSource'),
                     itemModel = dataSource.getByUid(item);
@@ -250,7 +308,7 @@ app.localization.registerView('reservas');
 
                 return itemModel;
             },
-            linkBind: function(linkString) {
+            linkBind: function (linkString) {
                 var linkChunks = linkString.split('|');
                 if (linkChunks[0].length === 0) {
                     return this.get('currentItem.' + linkChunks[1]);
@@ -267,7 +325,7 @@ app.localization.registerView('reservas');
         /// end add model properties
         /// start add model functions
         /// end add model functions
-        onShow: function(e) {
+        onShow: function (e) {
             this.set('addFormData', {
                 fechaAdd: '',
                 horasAdd: '',
@@ -279,11 +337,11 @@ app.localization.registerView('reservas');
             /// start add form show
             /// end add form show
         },
-        onCancel: function() {
+        onCancel: function () {
             /// start add model cancel
             /// end add model cancel
         },
-        onSaveClick: function(e) {
+        onSaveClick: function (e) {
             var addFormData = this.get('addFormData'),
                 filter = reservasModel && reservasModel.get('paramFilter'),
                 dataSource = reservasModel.get('dataSource'),
@@ -298,7 +356,7 @@ app.localization.registerView('reservas');
                 /// end add form data save
 
                 dataSource.add(addModel);
-                dataSource.one('change', function(e) {
+                dataSource.one('change', function (e) {
                     app.mobileApp.navigate('#:back');
                 });
 
@@ -320,7 +378,7 @@ app.localization.registerView('reservas');
         /// start edit model functions
         /// end edit model functions
         editFormData: {},
-        onShow: function(e) {
+        onShow: function (e) {
             var that = this,
                 itemUid = e.view.params.uid,
                 dataSource = reservasModel.get('dataSource'),
@@ -343,11 +401,11 @@ app.localization.registerView('reservas');
             /// start edit form show
             /// end edit form show
         },
-        linkBind: function(linkString) {
+        linkBind: function (linkString) {
             var linkChunks = linkString.split(':');
             return linkChunks[0] + ':' + this.get('itemData.' + linkChunks[1]);
         },
-        onSaveClick: function(e) {
+        onSaveClick: function (e) {
             var that = this,
                 editFormData = this.get('editFormData'),
                 itemData = this.get('itemData'),
@@ -364,14 +422,14 @@ app.localization.registerView('reservas');
             function editModel(data) {
                 /// start edit form data prepare
                 /// end edit form data prepare
-                dataSource.one('sync', function(e) {
+                dataSource.one('sync', function (e) {
                     /// start edit form data save success
                     /// end edit form data save success
 
                     app.mobileApp.navigate('#:back');
                 });
 
-                dataSource.one('error', function() {
+                dataSource.one('error', function () {
                     dataSource.cancelChanges(itemData);
                 });
 
@@ -384,7 +442,7 @@ app.localization.registerView('reservas');
             editModel();
             /// end edit form save handler
         },
-        onCancel: function() {
+        onCancel: function () {
             /// start edit form cancel
             /// end edit form cancel
         }
@@ -403,13 +461,123 @@ app.localization.registerView('reservas');
         parent.set('reservasModel', reservasModel);
     }
 
-    parent.set('onShow', function(e) {
+    parent.set('onShow', function (e) {
+        kendo.mobile.application.showLoading();
+        $('#reservasScreen [id^=Hora]').removeClass('disabled');
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null,
             isListmenu = false,
             backbutton = e.view.element && e.view.element.find('header [data-role="navbar"] .backButtonWrapper'),
             dataSourceOptions = reservasModel.get('_dataSourceOptions'),
-            dataSource;
+            dataSource,
+            cancha = e.view.params.cancha,
+            dia = e.view.params.dia,
+            grass = JSON.parse(e.view.params.grass),
+            fecha = kendo.parseDate(e.view.params.fecha, "MM-dd-yyyy");
 
+        var max = new Date(fecha);
+        max.setMonth(max.getMonth() + 1);
+        $("#fechaAdd").val(kendo.toString(fecha, "yyyy-MM-dd"));
+        $("#fechaAdd").attr("min", kendo.toString(fecha, "yyyy-MM-dd"));
+        $("#fechaAdd").attr("max", kendo.toString(max, "yyyy-MM-dd"));
+
+        $("#grassAdd").html("");
+        for (var i = 0; i < grass.length; i++) {
+            $("#grassAdd").append('<option value="' + grass[i].Id + '" costohora="' + grass[i].costohora + '" costodia="' + grass[i].costodia + '" costonoche="' + grass[i].costonoche + '">' + grass[i].descripcion + ' ' + grass[i].dimenciones + '</option>');
+        }
+
+
+        var fieldsExp = {
+            "cancha": cancha
+        };
+        var dsHorarios = new kendo.data.DataSource({
+            type: 'everlive',
+            transport: {
+                typeName: 'horarios',
+                dataProvider: dataProvider,
+                read: {
+                    headers: {
+                        "X-Everlive-Filter": JSON.stringify(fieldsExp)
+                    }
+                }
+            }
+        });
+
+        dsHorarios.fetch(function () {
+            $('#reservasScreen [id^=Hora]').removeClass('invisible');
+            var data = this.data();
+            switch (parseInt(dia)) {
+                case 1:
+                    var html = [];
+                    for (var i = 0; i < 24; i++) {
+                        if (data[0].Lunes[i] == false) {
+                            $("#Hora" + i).addClass('invisible');
+                        } else {
+                            $("#Hora" + i).removeClass('invisible');
+                        }
+                    }
+                    break;
+                case 2:
+                    var html = [];
+                    for (var i = 0; i < 24; i++) {
+                        if (data[0].Martes[i] == false) {
+                            $("#Hora" + i).addClass('invisible');
+                        } else {
+                            $("#Hora" + i).removeClass('invisible');
+                        }
+                    }
+                    break;
+                case 3:
+                    var html = [];
+                    for (var i = 0; i < 24; i++) {
+                        if (data[0].Miercoles[i] == false) {
+                            $("#Hora" + i).addClass('invisible');
+                        } else {
+                            $("#Hora" + i).removeClass('invisible');
+                        }
+                    }
+                    break;
+                case 4:
+                    var html = [];
+                    for (var i = 0; i < 24; i++) {
+                        if (data[0].Jueves[i] == false) {
+                            $("#Hora" + i).addClass('invisible');
+                        } else {
+                            $("#Hora" + i).removeClass('invisible');
+                        }
+                    }
+                    break;
+                case 5:
+                    var html = [];
+                    for (var i = 0; i < 24; i++) {
+                        if (data[0].Viernes[i] == false) {
+                            $("#Hora" + i).addClass('invisible');
+                        } else {
+                            $("#Hora" + i).removeClass('invisible');
+                        }
+                    }
+                    break;
+                case 6:
+                    var html = [];
+                    for (var i = 0; i < 24; i++) {
+                        if (data[0].Sabado[i] == false) {
+                            $("#Hora" + i).addClass('invisible');
+                        } else {
+                            $("#Hora" + i).removeClass('invisible');
+                        }
+                    }
+                    break;
+                default:
+                    var html = [];
+                    for (var i = 0; i < 24; i++) {
+                        if (data[0].Domingo[i] == false) {
+                            $("#Hora" + i).addClass('invisible');
+                        } else {
+                            $("#Hora" + i).removeClass('invisible');
+                        }
+                    }
+                    break;
+            }
+        })
         if (param || isListmenu) {
             backbutton.show();
             backbutton.css('visibility', 'visible');
@@ -427,6 +595,7 @@ app.localization.registerView('reservas');
     });
 
 })(app.reservas);
+
 
 // START_CUSTOM_CODE_reservasModel
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes

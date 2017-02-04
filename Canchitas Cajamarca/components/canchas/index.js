@@ -411,13 +411,13 @@ app.localization.registerView('canchas');
 function goToReservas(e) {
     var dataItem = app.canchas.canchasModel.get('currentItem');
     var fecha = new Date();
+    var dia = fecha.getDay();
     fecha = kendo.toString(fecha, "MM-dd-yyyy");
-    var id = dataItem.grass[0].Id;
     var filter = [
-        { field: "grass", operator: "eq", value: id },
+        { field: "grass", operator: "eq", value: dataItem.grass[0].Id },
         { field: "fecha", operator: "eq", value: kendo.parseDate(fecha, "MM-dd-yyyy") }
     ];
-    app.mobileApp.navigate('#components/reservas/view.html?filter=' + encodeURIComponent(JSON.stringify(filter)));
+    app.mobileApp.navigate('#components/reservas/view.html?filter=' + encodeURIComponent(JSON.stringify(filter)) + '&cancha=' + dataItem.Id + '&dia=' + dia + '&grass=' + encodeURIComponent(JSON.stringify(dataItem.grass)) + '&fecha=' + fecha);
 }
 
 /*function closeModalViewLogin() {

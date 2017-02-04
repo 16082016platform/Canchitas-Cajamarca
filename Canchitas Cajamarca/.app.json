@@ -498,6 +498,47 @@
       "title": "Grasses",
       "addToNavigation": true,
       "icon": "more"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "horarios",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "addScreenExtraFields": [],
+          "editScreenExtraFields": [],
+          "components": [
+            {
+              "type": "kendo-ui-mobile:editableListForm",
+              "components": [],
+              "name": "editableListForm64",
+              "formType": "edit"
+            }
+          ],
+          "name": "horariosModel",
+          "dataProvider": "backendServices",
+          "collection": "horarios",
+          "headerField": "cancha",
+          "subHeaderField": "activo",
+          "addItemForm": false,
+          "editItemForm": false,
+          "deleteItemButton": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "isMapView": false,
+          "serverSideSorting": false,
+          "serverSidePaging": false,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail",
+          "detailSubHeaderField": "cancha",
+          "detailDescriptionField": "activo"
+        }
+      ],
+      "title": "Horarios",
+      "addToNavigation": true,
+      "icon": "favorites"
     }
   ],
   "dataProviders": [

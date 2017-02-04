@@ -1,39 +1,228 @@
-<div data-role="view" data-title="View" data-layout="main" data-model="app.reservas" data-show="app.reservas.onShow" data-after-show="app.reservas.afterShow" id="reservasScreen" class="screen">
-    <header data-role="header">
-        <div data-role="navbar" class="header-text">
-
-            <span data-bind="text: strings.reservas.title"></span>
-
-            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
-
-            <a data-role="button" data-align="right" data-bind="events: { click: reservasModel.addClick }">Add</a></div>
-    </header>
-
-
-    <!-- START_CUSTOM_CODE_reservas -->
-    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
-    <!-- END_CUSTOM_CODE_reservas -->
-    <form class="km-filter-form custom-filter">
-
-        <div class="km-filter-wrap">
-            <input type="search" placeholder="Search..." data-bind="events:{keyup: reservasModel.searchChange}">
-        </div>
-    </form>
-    <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="inset" data-template="reservasModelTemplate" data-bind="source: reservasModel.dataSource, events: {click: reservasModel.itemClick}" data-pull-to-refresh="false" data-endless-scroll="false">
-    </ul>
-
-
-    <!-- START_CUSTOM_CODE_reservasModel -->
-    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
-
-    <!-- END_CUSTOM_CODE_reservasModel -->
-    <script type="text/x-kendo-template" id="reservasModelTemplate">
-        <div class="image-with-text">
-            # data = app.reservas.reservasModel.fixHierarchicalData(data); #
-
-            <h3>#: data['fecha'] #</h3>
-            <p>#: data['estado'] #</p>
-        </div>
-    </script>
+<div data-role="view" data-title="View" data-layout="main" data-model="app.reservas" data-show="app.reservas.onShow" data-after-show="app.reservas.afterShow"
+   id="reservasScreen" class="screen">
+   <header data-role="header">
+      <div data-role="navbar" class="header-text"> <span data-bind="text: strings.reservas.title"></span>
+         <a data-role="button" href="#appDrawer" data-rel="drawer"
+            data-align="left" data-icon="drawer-button"></a> <a data-role="button" data-align="right" data-bind="events: { click: reservasModel.addClick }">Add</a>
+      </div>
+   </header>
+   <!-- START_CUSTOM_CODE_reservas -->
+   <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+   <!-- END_CUSTOM_CODE_reservas -->
+   <!--
+      <form class="km-filter-form custom-filter">
+          <div class="km-filter-wrap"> <input type="search" placeholder="Search..." data-bind="events:{keyup: reservasModel.searchChange}"> </div>
+      </form>
+      <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="inset" data-template="reservasModelTemplate"
+          data-bind="source: reservasModel.dataSource, events: {click: reservasModel.itemClick}" data-pull-to-refresh="false" data-endless-scroll="false">
+      </ul>
+      <script type="text/x-kendo-template" id="reservasModelTemplate">
+          <div class="image-with-text"> # data = app.reservas.reservasModel.fixHierarchicalData(data); #
+              <h3>#: data['fecha'] #</h3>
+              <p>#: data['estado'] #</p>
+          </div>
+      </script>
+      -->
+   <div id="editableListForm60" class="form-view screen__content screen__content--form">
+      <form>
+         <ul class="form-content" data-role="listview" data-style="inset">
+            <li class="form-content-item">
+               <label id="grassAddField" class="field km-listview-label field--text km-label-above">
+               <span class="field__label" data-bind="text: strings.reservas.reservasModel.editableListForm60.grassAdd.title"></span>
+               <input data-bind="value: addFormData.grassAdd" type="text">
+               </label>
+            </li>
+            <li class="form-content-item">
+               <select id="grassAdd" data-bind="events:{change: reservasModel.buscarReservas}">
+                </select>
+            </li>
+            <li class="form-content-item">
+               <label id="costoAddField" class="field km-listview-label field--text km-label-above">
+               <span class="field__label" data-bind="text: strings.reservas.reservasModel.editableListForm60.costoAdd.title"></span>
+               <input id="costoAdd" data-bind="value: addFormData.costoAdd" type="text">
+               </label>
+            </li>
+            <li class="form-content-item">
+               <label id="horasAddField" class="field km-listview-label field--text km-label-above">
+               <span class="field__label" data-bind="text: strings.reservas.reservasModel.editableListForm60.horasAdd.title"></span>
+               <input id="horasAdd" data-bind="value: addFormData.horasAdd" type="text">
+               </label>
+            </li>
+            <li class="form-content-item">
+               <label id="fechaAddField" class="field km-listview-label field--date km-label-above">
+               <span class="field__label" data-bind="text: strings.reservas.reservasModel.editableListForm60.fechaAdd.title"></span>
+               <input id="fechaAdd" type="date" data-bind="events:{change: reservasModel.buscarReservas}">
+               </label>
+            </li>
+            <li id="Hora0" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>0:00</span><span class="text-muted"> hasta las 1:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input0" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora1" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>1:00</span><span class="text-muted"> hasta las 2:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input1" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora2" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>2:00</span><span class="text-muted"> hasta las 3:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input2" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora3" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>3:00</span><span class="text-muted"> hasta las 4:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input3" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora4" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>4:00</span><span class="text-muted"> hasta las 5:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input4" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora5" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>5:00</span><span class="text-muted"> hasta las 6:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input5" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora6" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>6:00</span><span class="text-muted"> hasta las 7:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input6" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora7" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>7:00</span><span class="text-muted"> hasta las 8:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input7" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora8" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>8:00</span><span class="text-muted"> hasta las 9:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input8" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora9" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>9:00</span><span class="text-muted"> hasta las 10:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input9" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora10" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>10:00</span><span class="text-muted"> hasta las 11:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input10" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora11" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>11:00</span><span class="text-muted"> hasta las 12:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input11" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora12" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>12:00</span><span class="text-muted"> hasta las 13:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input12" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora13" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>13:00</span><span class="text-muted"> hasta las 14:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input13" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora14" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>14:00</span><span class="text-muted"> hasta las 15:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input14" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora15" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>15:00</span><span class="text-muted"> hasta las 16:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input15" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora16" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>16:00</span><span class="text-muted"> hasta las 17:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input16" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora17" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>17:00</span><span class="text-muted"> hasta las 18:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input17" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora18" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>18:00</span><span class="text-muted"> hasta las 19:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input18" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora19" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>19:00</span><span class="text-muted"> hasta las 20:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input19" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora20" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>20:00</span><span class="text-muted"> hasta las 21:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input20" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora21" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>21:00</span><span class="text-muted"> hasta las 22:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input21" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora22" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>22:00</span><span class="text-muted"> hasta las 23:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input22" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+            <li id="Hora23" class="form-content-item">
+               <label class="field km-listview-label field--checkbox">
+                  <span>23:00</span><span class="text-muted"> hasta las 0:00 horas</span>
+                  <tag>0/4</tag>
+                  <input id="input23" type="checkbox" data-bind="events:{change: reservasModel.reservarHora}">
+               </label>
+            </li>
+         </ul>
+      </form>
+   </div>
 </div>

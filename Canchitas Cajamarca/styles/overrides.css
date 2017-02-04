@@ -4,12 +4,12 @@
 /* Theme overides - .box-shadow is deleted */
 
 .km-nova h1, .km-nova h2, .km-nova h3, .km-nova h4, .km-nova h5, .km-nova h6, .km-nova p {
-    color: white;
+    color: black;
 }
 
 .km-nova .km-content {
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
 }
 
 
@@ -206,7 +206,7 @@
     color: #32364c;*/
     border: white solid 0px;
     border-bottom: white solid .5px;
-    color: white;
+    color: black;
 }
 
 .km-nova .km-list > li.km-load-more {
@@ -222,7 +222,7 @@
 }
 
 .km-nova .km-list > li label, .km-nova .km-list fieldset textarea, .km-nova .km-list fieldset input, .km-nova .km-checkbox-label, .km-nova .km-radio-label {
-    color: white;
+    color: black;
 }
 
 .km-nova .km-list fieldset .km-inline-field {
@@ -454,7 +454,7 @@
 /* Loader & Pull-to-refresh */
 
 .km-nova .km-loader {
-    background: rgba(0, 0, 0, 0.05);
+    background: rgba(0, 0, 0, 0.7);
 }
 
 .km-nova .km-detail, .km-nova .km-detail .km-icon:after {
@@ -493,7 +493,7 @@
 }
 
 .km-nova .km-loading-left:after {
-    background: #dfe1e2;
+    background: #00a00d;
 }
 
 .km-nova span.km-loading-right {
@@ -537,7 +537,7 @@
 }
 
 .km-nova .km-touch-scrollbar, .km-nova .km-loading-left:before {
-    background: #32364c;
+    background: #00a00d;
 }
 
 .km-nova .km-navbar *, .km-nova .k-toolbar *, .km-nova .km-navbar .km-leftitem .km-back:before, .km-nova .km-tabstrip *, .km-nova .km-drawer .km-list > li, .km-nova .km-drawer .km-list > li > .km-listview-link, .km-nova .km-drawer .km-list > li .km-icon {
@@ -661,7 +661,7 @@
 
 .km-nova .km-list .field.km-label-above input[type=text]:not(.k-input), .km-nova .km-list .field.km-label-hidden input[type=text]:not(.k-input) {
     left: 0;
-    color: white;
+    color: black;
 }
 
 
@@ -678,7 +678,7 @@
     padding: 0;
     margin-top: 0.3em;
     min-width: 6em;
-    color: white;
+    color: black;
     word-wrap: break-word;
 }
 
@@ -697,6 +697,50 @@
     width: 100%;
 }
 
-#mapaScreen #map h1{
+#mapaScreen #map h1 {
     color: black !important;
+}
+
+.text-muted {
+    color: lightgray;
+    font-size: small;
+}
+
+#reservasScreen li.km-state-active {
+    background: lightgray;
+    color: #00a00d;
+}
+#reservasScreen li.km-state-active>* {
+    color: #00a00d !important;
+}
+
+#reservasScreen tag {
+    float: right;
+    margin-right: 40px;
+    color: lightgray;
+}
+
+#reservasScreen li.disabled {
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+#reservasScreen li.invisible {
+    display: none;
+}
+
+#reservasScreen li.disabled tag {
+    display: none;
+}
+
+#reservasScreen li input[type=checkbox] {
+    border-color: black;
+}
+
+#reservasScreen li.disabled input[type=checkbox] {
+    border-color: transparent;
+}
+
+#reservasScreen li.disabled input:after {
+    content: "\a2";
 }

@@ -1,0 +1,167 @@
+<div data-role="view" data-title="View" data-layout="main" data-model="app.horarios" data-show="app.horarios.onShow" data-after-show="app.horarios.afterShow" id="horariosScreen" class="screen">
+    <header data-role="header">
+        <div data-role="navbar" class="header-text">
+
+            <span data-bind="text: strings.horarios.title"></span>
+
+            <a data-role="button" href="#appDrawer" data-rel="drawer" data-align="left" data-icon="drawer-button"></a>
+
+        </div>
+    </header>
+
+
+    <!-- START_CUSTOM_CODE_horarios -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_horarios -->
+    <ul class="masterDetailView" data-role="listview" data-auto-bind="false" data-style="inset" data-template="horariosModelTemplate" data-bind="source: horariosModel.dataSource, events: {click: horariosModel.itemClick}" data-pull-to-refresh="false" data-endless-scroll="false">
+    </ul>
+
+
+    <!-- START_CUSTOM_CODE_horariosModel -->
+    <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+
+    <!-- END_CUSTOM_CODE_horariosModel -->
+    <script type="text/x-kendo-template" id="horariosModelTemplate">
+        <div class="image-with-text">
+            # data = app.horarios.horariosModel.fixHierarchicalData(data); #
+
+            <h3>#: data['cancha'] #</h3>
+            <p>#: data['activo'] #</p>
+        </div>
+    </script>
+
+
+
+    <div id="editableListForm13" class="form-view screen__content screen__content--form">
+        <form>
+            <ul class="form-content" data-role="listview" data-style="inset">
+
+<li class="form-content-item"> <label id="0Field" class="field km-listview-label field--checkbox">
+   <span class="field__label">0:00</span>
+   <input id="0input" data-bind="checked: editFormData.hora0" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="1Field" class="field km-listview-label field--checkbox">
+   <span class="field__label">1:00</span>
+   <input id="1input" data-bind="checked: editFormData.hora1" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="2Field" class="field km-listview-label field--checkbox">
+   <span class="field__label">2:00</span>
+   <input id="2input" data-bind="checked: editFormData.hora2" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="3Field" class="field km-listview-label field--checkbox">
+   <span class="field__label">3:00</span>
+   <input id="3input" data-bind="checked: editFormData.hora3" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="4Field" class="field km-listview-label field--checkbox">
+   <span class="field__label">4:00</span>
+   <input id="4input" data-bind="checked: editFormData.hora4" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="5Field" class="field km-listview-label field--checkbox">
+   <span class="field__label">5:00</span>
+   <input id="5input" data-bind="checked: editFormData.hora5" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="6Field" class="field km-listview-label field--checkbox">
+   <span class="field__label">6:00</span>
+   <input id="6input" data-bind="checked: editFormData.hora6" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="7Field" class="field km-listview-label field--checkbox">
+   <span class="field__label">7:00</span>
+   <input id="7input" data-bind="checked: editFormData.hora7" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="8Field" class="field km-listview-label field--checkbox">
+   <span class="field__label">8:00</span>
+   <input id="8input" data-bind="checked: editFormData.hora8" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="9Field" class="field km-listview-label field--checkbox">
+   <span class="field__label">9:00</span>
+   <input id="9input" data-bind="checked: editFormData.hora9" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="10Field10class="field km-listview-label field--checkbox">
+   <span class="field__label">10:00</span>
+   <input id="10input" data-bind="checked: editFormData.hora10" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="11Field11class="field km-listview-label field--checkbox">
+   <span class="field__label">11:00</span>
+   <input id="11input" data-bind="checked: editFormData.hora11" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="12Field12class="field km-listview-label field--checkbox">
+   <span class="field__label">12:00</span>
+   <input id="12input" data-bind="checked: editFormData.hora12" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="13Field13class="field km-listview-label field--checkbox">
+   <span class="field__label">13:00</span>
+   <input id="13input" data-bind="checked: editFormData.hora13" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="14Field14class="field km-listview-label field--checkbox">
+   <span class="field__label">14:00</span>
+   <input id="14input" data-bind="checked: editFormData.hora14" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="15Field15class="field km-listview-label field--checkbox">
+   <span class="field__label">15:00</span>
+   <input id="15input" data-bind="checked: editFormData.hora15" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="16Field16class="field km-listview-label field--checkbox">
+   <span class="field__label">16:00</span>
+   <input id="16input" data-bind="checked: editFormData.hora16" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="17Field17class="field km-listview-label field--checkbox">
+   <span class="field__label">17:00</span>
+   <input id="17input" data-bind="checked: editFormData.hora17" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="18Field18class="field km-listview-label field--checkbox">
+   <span class="field__label">18:00</span>
+   <input id="18input" data-bind="checked: editFormData.hora18" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="19Field19class="field km-listview-label field--checkbox">
+   <span class="field__label">19:00</span>
+   <input id="19input" data-bind="checked: editFormData.hora19" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="20Field20class="field km-listview-label field--checkbox">
+   <span class="field__label">20:00</span>
+   <input id="20input" data-bind="checked: editFormData.hora20" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="21Field21class="field km-listview-label field--checkbox">
+   <span class="field__label">21:00</span>
+   <input id="21input" data-bind="checked: editFormData.hora21" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="22Field22class="field km-listview-label field--checkbox">
+   <span class="field__label">22:00</span>
+   <input id="22input" data-bind="checked: editFormData.hora22" type="checkbox">
+   </label> 
+</li>
+<li class="form-content-item"> <label id="23Field23class="field km-listview-label field--checkbox">
+   <span class="field__label">23:00</span>
+   <input id="23input" data-bind="checked: editFormData.hora23" type="checkbox">
+   </label> 
+</li>
+            </ul>
+        </form>
+        <!-- START_CUSTOM_CODE_editableListForm13 -->
+        <!-- Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes -->
+        <!-- END_CUSTOM_CODE_editableListForm13 -->
+    </div>
+    
+</div>
