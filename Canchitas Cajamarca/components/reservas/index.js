@@ -202,10 +202,8 @@ app.localization.registerView('reservas');
                         }
                     }
                 }
-
-                console.log(horas);
-                console.log(costo);
                 $("#costoAdd").val(costo);
+                horas.length > 0 ? $("#footerConfirmar").show(1000) : $("#footerConfirmar").hide(1000);
             },
             searchChange: function (e) {
                 var searchVal = e.target.value,
@@ -221,6 +219,10 @@ app.localization.registerView('reservas');
                 fetchFilteredData(reservasModel.get('paramFilter'), searchFilter);
             },
             addReserva: function (e) {
+                if (horas.length > 0) {
+                } else {
+                    return;
+                }
                 var filter = reservasModel && reservasModel.get('paramFilter'),
                     dataSource = reservasModel.get('dataSource'),
                     addModel = {};
@@ -655,6 +657,7 @@ app.localization.registerView('reservas');
         dataSource = new kendo.data.DataSource(dataSourceOptions);
         reservasModel.set('dataSource', dataSource);
         fetchFilteredData(param);
+        horas.length > 0 ? $("#footerConfirmar").slideUp(1000) : $("#footerConfirmar").hide(1000);
     });
 
 })(app.reservas);
