@@ -4,7 +4,10 @@ app.canchas = kendo.observable({
     onShow: function () { },
     afterShow: function () {
         //app.canchas.canchasModel.dataSource.sort({ field: "distancia", dir: "desc" });
-    }
+    },
+    cargarMapa: function () {
+        app.canchas.canchasModel.cargarMapa(app.canchas.canchasModel.dataSource);
+    },
 });
 app.localization.registerView('canchas');
 
@@ -240,6 +243,60 @@ app.localization.registerView('canchas');
         /// end data sources
         canchasModel = kendo.observable({
             _dataSourceOptions: dataSourceOptions,
+            cargarMapa: function (dataSource) {
+                dataSource.fetch(function () {
+
+                    //var index = dataSource.indexOf(dataItem);
+                    var map;
+                    var bounds = new google.maps.LatLngBounds();
+                    var mapOptions = {
+                        mapTypeId: 'roadmap'
+                    };
+
+                    // Display a map on the page
+                    map = new google.maps.Map(document.getElementById("map"), mapOptions);
+                    map.setTilt(45);
+
+                    // Display multiple markers on a map
+                    var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+                    // Loop through our array of markers & place each one on the map  
+                    for (i = 0; i < dataSource.total(); i++) {
+                        var dataItem = dataSource.at(i), propName;
+                        
+                        var localizacion = dataItem.localizacion.split(",");
+
+                        var position = new google.maps.LatLng(localizacion[0].replace("Latitude: ",""), localizacion[1].replace("Longitude: ",""));
+
+                        bounds.extend(position);
+                        marker = new google.maps.Marker({
+                            position: position,
+                            map: map,
+                            title: dataItem.id
+                        });
+
+                        // Allow each marker to have an info window    
+                        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                            return function () {
+                                map.setZoom(15);
+                                //bounds.extend(this.getPosition());
+                                map.setCenter(this.getPosition());
+                                infoWindow.setContent("<h1 onclick='itemClickMapa(" + '"' + dataItem.uid + '"' + ");'>" + dataSource.at(i).nombre + "</h1>");
+                                infoWindow.open(map, marker);
+                            }
+                        })(marker, i));
+
+                        // Automatically center the map fitting all markers on the screen
+                        map.fitBounds(bounds);
+                    }
+
+                    // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+                    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function (event) {
+                        this.setZoom(12);
+                        google.maps.event.removeListener(boundsListener);
+                    });
+                });
+            },
             searchChange: function (e) {
                 var searchVal = e.target.value,
                     searchFilter;
@@ -328,7 +385,6 @@ app.localization.registerView('canchas');
                 canchasModel.set('getCoordinates', getCoordinates(itemModel.localizacion));
 
                 /// end detail form show
-
             },
             setCurrentItemByUid: function (uid) {
                 var item = uid,
@@ -429,4 +485,8 @@ function onClick() {
     mv.shim.popup.options.animation.open.effects = "zoom";
     mv.open();
 }*/
+
+function itemClickMapa(uid){
+    app.mobileApp.navigate('#components/canchas/details.html?uid=' + uid);
+}
 

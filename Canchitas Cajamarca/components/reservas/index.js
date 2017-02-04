@@ -47,12 +47,14 @@ app.localization.registerView('reservas');
             }
             $('#reservasScreen [id^=Hora]').removeClass('disabled');
             $('#reservasScreen [id^="input"]').prop("checked", false);
+            $('#reservasScreen [id^="Hora"] tag').text("0/4");
 
             dataSource.fetch(function () {
                 var data = this.data();
                 for (var i = 0; i < data.length; i++) {
                     for (var j = 0; j < data[i].horas.length; j++) {
                         $("#Hora" + data[i].horas[j]).addClass('disabled');
+                        $("#Hora" + data[i].horas[j] + " tag").text(data[i].Owner);
                     }
                 }
             }).then(function () {
@@ -82,7 +84,18 @@ app.localization.registerView('reservas');
             type: 'everlive',
             transport: {
                 typeName: 'reservas',
-                dataProvider: dataProvider
+                dataProvider: dataProvider,
+                read: {
+                    headers: {
+                        'X-Everlive-Expand': {
+                            "Owner": {
+                                "TargetTypeName": "Users",
+                                "ReturnAs": "Owner",
+                                "SingleField": "DisplayName"
+                            }
+                        }
+                    }
+                }
             },
             change: function (e) {
                 var data = this.data();
@@ -153,22 +166,43 @@ app.localization.registerView('reservas');
                 var h = parseInt(e.currentTarget.id.replace('input', '')),
                     costodia = parseInt($("#grassAdd option:selected").attr("costodia")),
                     costonoche = parseInt($("#grassAdd option:selected").attr("costonoche")),
-                    costohora = parseInt($("#grassAdd option:selected").attr("costohora"));
-                if ($("#" + e.currentTarget.id).is(':checked')) {
-                    horas.push(h);
-                    if (costohora < h) {
-                        costo += costodia;
+                    horainicio = parseInt($("#grassAdd option:selected").attr("horainicio")),
+                    horafin = parseInt($("#grassAdd option:selected").attr("horafin"));
+
+                if (horafin < horainicio) {
+                    if ($("#" + e.currentTarget.id).is(':checked')) {
+                        horas.push(h);
+                        if (horafin < h && horainicio > h) {//intervalo de dia
+                            costo += costodia;
+                        } else {
+                            costo += costonoche;
+                        }
                     } else {
-                        costo += costonoche;
+                        horas.splice(horas.indexOf(h, 1));
+                        if (horafin < h && horainicio > h) {//intervalo de dia
+                            costo -= costodia;
+                        } else {
+                            costo -= costonoche;
+                        }
                     }
                 } else {
-                    horas.splice(horas.indexOf(h, 1));
-                    if (costohora < h) {
-                        costo -= costodia;
+                    if ($("#" + e.currentTarget.id).is(':checked')) {
+                        horas.push(h);
+                        if (horainicio < h && horafin > h) {//intervalo de noche
+                            costo += costonoche;
+                        } else {
+                            costo += costodia;
+                        }
                     } else {
-                        costo -= costonoche;
+                        horas.splice(horas.indexOf(h, 1));
+                        if (horainicio < h && horafin > h) {//intervalo de noche
+                            costo -= costonoche;
+                        } else {
+                            costo -= costodia;
+                        }
                     }
                 }
+
                 console.log(horas);
                 console.log(costo);
                 $("#costoAdd").val(costo);
@@ -185,6 +219,35 @@ app.localization.registerView('reservas');
                     };
                 }
                 fetchFilteredData(reservasModel.get('paramFilter'), searchFilter);
+            },
+            addReserva: function (e) {
+                var filter = reservasModel && reservasModel.get('paramFilter'),
+                    dataSource = reservasModel.get('dataSource'),
+                    addModel = {};
+
+                function saveModel(data) {
+                    /// start add form data save
+                    addModel.fecha = kendo.parseDate($("#fechaAdd").val(), "yyyy-MM-dd");
+                    addModel.costo = costo;
+                    addModel.horas = horas;
+                    addModel.estado = "Reservado";
+                    addModel.grass = $("#grassAdd").val();
+
+                    /// end add form data save
+                    dataSource.add(addModel);
+                    dataSource.one('change', function (e) {
+                        app.mobileApp.navigate('#:back');
+                    });
+
+                    dataSource.sync();
+                    app.clearFormDomData('add-item-view');
+                };
+
+                /// start add form save
+                /// end add form save
+                /// start add form save handler
+                saveModel();
+                /// end add form save handler©
             },
             fixHierarchicalData: function (data) {
                 var result = {},
@@ -342,6 +405,7 @@ app.localization.registerView('reservas');
             /// end add model cancel
         },
         onSaveClick: function (e) {
+
             var addFormData = this.get('addFormData'),
                 filter = reservasModel && reservasModel.get('paramFilter'),
                 dataSource = reservasModel.get('dataSource'),
@@ -482,9 +546,8 @@ app.localization.registerView('reservas');
 
         $("#grassAdd").html("");
         for (var i = 0; i < grass.length; i++) {
-            $("#grassAdd").append('<option value="' + grass[i].Id + '" costohora="' + grass[i].costohora + '" costodia="' + grass[i].costodia + '" costonoche="' + grass[i].costonoche + '">' + grass[i].descripcion + ' ' + grass[i].dimenciones + '</option>');
+            $("#grassAdd").append('<option value="' + grass[i].Id + '" horainicio="' + grass[i].horainicio + '" horafin="' + grass[i].horafin + '" costodia="' + grass[i].costodia + '" costonoche="' + grass[i].costonoche + '">' + grass[i].descripcion + ' ' + grass[i].dimenciones + '</option>');
         }
-
 
         var fieldsExp = {
             "cancha": cancha

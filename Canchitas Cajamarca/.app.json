@@ -148,38 +148,6 @@
     },
     {
       "type": "kendo-ui-mobile:view",
-      "name": "mapa",
-      "components": [
-        {
-          "type": "kendo-ui-mobile:editableList",
-          "listExtraFields": [],
-          "detailExtraFields": [],
-          "addScreenExtraFields": [],
-          "editScreenExtraFields": [],
-          "components": [],
-          "name": "mapaModel",
-          "dataProvider": "backendServices",
-          "collection": "canchas",
-          "headerField": "nombre",
-          "subHeaderField": "localizacion",
-          "addItemForm": false,
-          "editItemForm": false,
-          "deleteItemButton": false,
-          "pullToRefresh": false,
-          "endlessScroll": false,
-          "isMapView": false,
-          "serverSideSorting": false,
-          "serverSidePaging": false,
-          "detailHeaderFieldSource": "static",
-          "detailHeaderFieldValue": "Details"
-        }
-      ],
-      "title": "Mapa",
-      "addToNavigation": true,
-      "icon": "globe"
-    },
-    {
-      "type": "kendo-ui-mobile:view",
       "name": "sugerencias",
       "components": [
         {

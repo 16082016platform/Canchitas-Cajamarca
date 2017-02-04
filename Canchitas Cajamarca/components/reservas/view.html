@@ -1,9 +1,8 @@
 <div data-role="view" data-title="View" data-layout="main" data-model="app.reservas" data-show="app.reservas.onShow" data-after-show="app.reservas.afterShow"
-   id="reservasScreen" class="screen">
+   id="reservasScreen" class="screen" data-transition="overlay:up">
    <header data-role="header">
       <div data-role="navbar" class="header-text"> <span data-bind="text: strings.reservas.title"></span>
-         <a data-role="button" href="#appDrawer" data-rel="drawer"
-            data-align="left" data-icon="drawer-button"></a> <a data-role="button" data-align="right" data-bind="events: { click: reservasModel.addClick }">Add</a>
+         <a data-role="backbutton" data-align="left">Back</a>
       </div>
    </header>
    <!-- START_CUSTOM_CODE_reservas -->
@@ -29,23 +28,14 @@
             <li class="form-content-item">
                <label id="grassAddField" class="field km-listview-label field--text km-label-above">
                <span class="field__label" data-bind="text: strings.reservas.reservasModel.editableListForm60.grassAdd.title"></span>
-               <input data-bind="value: addFormData.grassAdd" type="text">
-               </label>
-            </li>
-            <li class="form-content-item">
                <select id="grassAdd" data-bind="events:{change: reservasModel.buscarReservas}">
                 </select>
+               </label>
             </li>
             <li class="form-content-item">
                <label id="costoAddField" class="field km-listview-label field--text km-label-above">
                <span class="field__label" data-bind="text: strings.reservas.reservasModel.editableListForm60.costoAdd.title"></span>
                <input id="costoAdd" data-bind="value: addFormData.costoAdd" type="text">
-               </label>
-            </li>
-            <li class="form-content-item">
-               <label id="horasAddField" class="field km-listview-label field--text km-label-above">
-               <span class="field__label" data-bind="text: strings.reservas.reservasModel.editableListForm60.horasAdd.title"></span>
-               <input id="horasAdd" data-bind="value: addFormData.horasAdd" type="text">
                </label>
             </li>
             <li class="form-content-item">
@@ -225,4 +215,10 @@
          </ul>
       </form>
    </div>
+
+   <header data-role="footer">
+        <div data-role="navbar" class="header-text">
+             <a data-role="button" data-click-on="down" data-align="center"  data-bind="events:{click: reservasModel.addReserva}">OK</a>
+        </div>
+    </header>
 </div>

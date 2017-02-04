@@ -729,9 +729,6 @@
     display: none;
 }
 
-#reservasScreen li.disabled tag {
-    display: none;
-}
 
 #reservasScreen li input[type=checkbox] {
     border-color: black;
